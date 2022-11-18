@@ -1,0 +1,23 @@
+{
+  "name": "discordbotkwint",
+  "version": "1.0.0",
+  "description": "Discord bot for programming bitches",
+  "main": "main.js",
+  "scripts": {
+    "start": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcmvdb/DiscordBotKwint.git"
+  },
+  "author": "Programming Bitches",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jcmvdb/DiscordBotKwint/issues"
+  },
+  "homepage": "https://github.com/jcmvdb/DiscordBotKwint#readme",
+  "dependencies": {
+    "discord.js": "^14.6.0"
+  }
+}
