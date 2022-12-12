@@ -11,7 +11,6 @@ module.exports = {
         const noOption = 'Er is geen reden gegeven';
         let test = interaction.options.getString('input') ?? noOption;
         await interaction.reply(`het werk eindelijk ${interaction.user.username} en dit is de input **${test}**`);
-        // console.log(test)
 
     },
 };
