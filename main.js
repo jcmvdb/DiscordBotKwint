@@ -1,8 +1,4 @@
 const { Client, GatewayIntentBits, Routes, Collection } = require("discord.js");
-// if (process.argv[2] === "peter") {
-// } else if (process.argv[2] !== "thierry"){
-//     process.argv[2] = "thierry";
-// }
 if (process.argv[2] !== "peter" && process.argv[2] !== "thierry") {
     process.argv[2] = "thierry";
 }
