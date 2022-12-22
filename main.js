@@ -1,12 +1,13 @@
 const { Client, GatewayIntentBits, Routes, Collection } = require("discord.js");
-const botConfig = require('./secrets/thierry.json');
+const botConfig = require(`./secrets/${process.argv[2]}.json`);
 const fs = require("node:fs");
 const path = require('node:path');
 const { REST } = require("@discordjs/rest");
+console.log(process.argv)
 
 const client = new Client({intents: [GatewayIntentBits.Guilds]});
 client.commands = new Collection();
-const slashCommands = [];
+const slashCommands = [];  
 
 client.once("ready", () => {
     console.log(`${client.user.username} is online!`);
