@@ -1,8 +1,8 @@
 const { Client, GatewayIntentBits, Routes, Collection } = require("discord.js");
-if (process.argv[2] !== "peter") {
+if (process.argv[2].toLowerCase() !== "peter") {
     process.argv[2] = "thierry";
 }
-const botConfig = require(`./secrets/${process.argv[2]}.json`);
+const botConfig = require(`./secrets/${process.argv[2].toLowerCase()}.json`);
 const fs = require("node:fs");
 const path = require('node:path');
 const { REST } = require("@discordjs/rest");
