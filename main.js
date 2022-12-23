@@ -32,7 +32,7 @@ for (const file of commandFiles) {
     client.commands.set(command.data.name, command);
     slashCommands.push(command.data.toJSON());
 
-    console.log(`The file ${command.data.name}.js is loaded`);
+//    console.log(`The file ${command.data.name}.js is loaded`);
 }
 
 client.on('interactionCreate', async interaction => {

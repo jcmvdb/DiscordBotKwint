@@ -16,13 +16,13 @@ module.exports = {
 
     async execute(client, interaction) {
 
-        let role = await interaction.guild.roles.cache.find(r => r.name.toLowerCase() == "owner");
+        let role = await interaction.guild.roles.cache.find(r => r.name.toLowerCase() === "owner");
 
         let member = interaction.options.getMember("user")
 
         if (member.roles.cache.has(role.id)) return interaction.reply("Deze persoon kan je niet bannen");
 
-        let reason = await interaction.options.getString("reason")
+        let reason =  interaction.options.getString("reason")
 
         await member.send(`Bannen with the reason \n ${reason}`).catch(() => {
             interaction.channel.send(`this bitch has DM closed`);

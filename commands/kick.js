@@ -16,7 +16,7 @@ module.exports = {
 
     async execute(client, interaction) {
 
-        let role = await interaction.guild.roles.cache.find(r => r.name.toLowerCase() == "owner");
+        let role = await interaction.guild.roles.cache.find(r => r.name.toLowerCase() === "owner");
 
         let member = interaction.options.getMember("user")
 
