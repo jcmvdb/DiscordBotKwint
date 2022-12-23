@@ -1,16 +1,12 @@
-const { Client, GatewayIntentBits, Routes, Collection } = require("discord.js");
-if (process.argv[2].toLowerCase() !== "peter") {
-    process.argv[2] = "thierry";
-}
-const botConfig = require(`./secrets/${process.argv[2].toLowerCase()}.json`);
+const {Client, GatewayIntentBits, Routes, Collection} = require("discord.js");
+const botConfig = require(`./secrets/${botSelector(process.argv)}.json`);
 const fs = require("node:fs");
 const path = require('node:path');
-const { REST } = require("@discordjs/rest");
-console.log(process.argv)
+const {REST} = require("@discordjs/rest");
 
 const client = new Client({intents: [GatewayIntentBits.Guilds]});
 client.commands = new Collection();
-const slashCommands = [];  
+const slashCommands = [];
 
 client.once("ready", () => {
     console.log(`${client.user.username} is online!`);
@@ -21,9 +17,9 @@ client.once("ready", () => {
 
     const rest = new REST({version: 10}).setToken(token);
 
-    rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: slashCommands })
-    .then(() => console.log('succesfully registered application commands.'))
-    .catch(console.error);
+    rest.put(Routes.applicationGuildCommands(clientId, guildId), {body: slashCommands})
+        .then(() => console.log('succesfully registered application commands.'))
+        .catch(console.error);
 });
 
 const commandsPath = path.join(__dirname, 'commands');
@@ -51,8 +47,18 @@ client.on('interactionCreate', async interaction => {
         console.log(interaction.user.username + " heeft commando " + interaction.commandName + " uitgevoerd");
     } catch (error) {
         console.log(error);
-        await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true});
+        await interaction.reply({content: 'There was an error while executing this command!', ephemeral: true});
     }
 });
 
 client.login(botConfig.token);
+
+
+function botSelector(args) {
+    if (!args[2] || args[2].toLowerCase() !== "peter" || args[2].toLowerCase() !== "prod") {
+        return "thierry"
+    }
+    else {
+        return "peter"
+    }
+}
