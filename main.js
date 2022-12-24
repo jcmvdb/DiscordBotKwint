@@ -44,7 +44,7 @@ client.on('interactionCreate', async interaction => {
 
     try {
         await command.execute(client, interaction);
-        console.log(interaction.user.username + " heeft commando " + interaction.commandName + " uitgevoerd");
+        console.log(`user: ${interaction.user.username}, has used command: ${interaction.commandName}`);
     } catch (error) {
         console.log(error);
         await interaction.reply({content: 'There was an error while executing this command!', ephemeral: true});
@@ -55,7 +55,7 @@ client.login(botConfig.token);
 
 
 function botSelector(args) {
-    const botName =  args?.[2]?.toLowerCase();
+    const botName = args?.[2]?.toLowerCase();
     const matchesNames = botName === "peter" || botName === "prod";
     return matchesNames ? "peter" : "thierry";
 }
