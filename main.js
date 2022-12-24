@@ -8,6 +8,8 @@ const client = new Client({intents: [GatewayIntentBits.Guilds]});
 client.commands = new Collection();
 const slashCommands = [];
 
+const verbosity = verbositySelector(process.argv, botConfig);
+
 client.once("ready", () => {
     console.log(`${client.user.username} is online!`);
 
@@ -32,7 +34,9 @@ for (const file of commandFiles) {
     client.commands.set(command.data.name, command);
     slashCommands.push(command.data.toJSON());
 
-//    console.log(`The file ${command.data.name}.js is loaded`);
+    if(verbosity === "high") {
+        //    console.log(`The file ${command.data.name}.js is loaded`);
+    }
 }
 
 client.on('interactionCreate', async interaction => {
@@ -56,6 +60,17 @@ client.login(botConfig.token);
 
 function botSelector(args) {
     const botName =  args?.[2]?.toLowerCase();
-    const matchesNames = botName === "peter" || botName === "beep";
+    const matchesNames = botName === "peter" || botName === "prod";
     return matchesNames ? "peter" : "thierry";
+}
+
+function verbositySelector(args, botConfig){
+    const options = ["high", "low"]
+    let verbosity;
+    if(options.includes(args?.[3])){
+        verbosity = args[3];
+        console.log(verbosity + "a")
+    }
+
+    return verbosity;
 }
