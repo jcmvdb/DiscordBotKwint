@@ -55,10 +55,7 @@ client.login(botConfig.token);
 
 
 function botSelector(args) {
-    if (!args[2] || args[2].toLowerCase() !== "peter" || args[2].toLowerCase() !== "prod") {
-        return "thierry"
-    }
-    else {
-        return "peter"
-    }
+    const  botName =  args?.[2]?.toLowerCase();
+    const matchesNames = botName === "peter" || botName === "beep";
+    return matchesNames ? "peter" : "thierry";
 }
