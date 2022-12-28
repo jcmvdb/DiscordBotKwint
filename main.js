@@ -1,5 +1,7 @@
+const args = require("./argumentHandling")
 const {Client, GatewayIntentBits, Routes, Collection} = require("discord.js");
-const botConfig = require(`./secrets/${botSelector(process.argv)}.json`);
+const arguments = args.argHandler(process.argv);
+const botConfig = require(`./secrets/${arguments.bot}.json`);
 const fs = require("node:fs");
 const path = require('node:path');
 const {REST} = require("@discordjs/rest");
@@ -7,8 +9,6 @@ const {REST} = require("@discordjs/rest");
 const client = new Client({intents: [GatewayIntentBits.Guilds]});
 client.commands = new Collection();
 const slashCommands = [];
-
-const verbosity = verbositySelector(process.argv, botConfig);
 
 client.once("ready", () => {
     console.log(`${client.user.username} is online!`);
@@ -34,8 +34,8 @@ for (const file of commandFiles) {
     client.commands.set(command.data.name, command);
     slashCommands.push(command.data.toJSON());
 
-    if(verbosity === "high") {
-        //    console.log(`The file ${command.data.name}.js is loaded`);
+    if(arguments.verbosity === "high") {
+            console.log(`The file ${command.data.name}.js is loaded`);
     }
 }
 
@@ -58,19 +58,19 @@ client.on('interactionCreate', async interaction => {
 client.login(botConfig.token);
 
 
-function botSelector(args) {
-    const botName =  args?.[2]?.toLowerCase();
-    const matchesNames = botName === "peter" || botName === "prod";
-    return matchesNames ? "peter" : "thierry";
-}
-
-function verbositySelector(args, botConfig){
-    const options = ["high", "low"]
-    let verbosity;
-    if(options.includes(args?.[3])){
-        verbosity = args[3];
-        console.log(verbosity + "a")
-    }
-
-    return verbosity;
-}
+//function botSelector(args) {
+//    const botName =  args?.[2]?.toLowerCase();
+//    const matchesNames = botName === "peter" || botName === "prod";
+//    return matchesNames ? "peter" : "thierry";
+//}
+//
+//function verbositySelector(args, botConfig){
+//    const options = ["high", "low"]
+//    let verbosity;
+//    if(options.includes(args?.[3])){
+//        verbosity = args[3];
+//        console.log(verbosity + "a")
+//    }
+//
+//    return verbosity;
+//}

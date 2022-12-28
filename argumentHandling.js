@@ -1,6 +1,19 @@
-function argumentHandler(arguments){
-    arguments = {
-        "listOfProvidedArguments" : [a, b ,c],
+function argHandler(args){
+    let obj1 = processArgumentsToJson(args)
+    return {
+        "bot": "peter",
+        "verbosity": "low"
     }
-    return arguments;
 }
+
+
+function processArgumentsToJson(args){
+    const validArguments = {
+        "bot": ["peter", "thierry"],
+        "-v": ["low", "high"],
+    }
+    console.log(args)
+
+}
+
+module.exports = { argHandler };
