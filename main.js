@@ -1,5 +1,7 @@
+const args = require("./argumentHandling")
 const {Client, GatewayIntentBits, Routes, Collection} = require("discord.js");
-const botConfig = require(`./secrets/${botSelector(process.argv)}.json`);
+const arguments = args.argHandler(process.argv);
+const botConfig = require(`./secrets/${arguments.bot}.json`);
 const fs = require("node:fs");
 const path = require('node:path');
 const {REST} = require("@discordjs/rest");
@@ -35,7 +37,9 @@ for (const file of commandFiles) {
     client.commands.set(command.data.name, command);
     slashCommands.push(command.data.toJSON());
 
-//    console.log(`The file ${command.data.name}.js is loaded`);
+    if (arguments.verbosity === "high") {
+        console.log(`The file ${command.data.name}.js is loaded`);
+    }
 }
 
 client.on('interactionCreate', async interaction => {
@@ -55,10 +59,3 @@ client.on('interactionCreate', async interaction => {
 });
 
 client.login(botConfig.token);
-
-
-function botSelector(args) {
-    const botName = args?.[2]?.toLowerCase();
-    const matchesNames = botName === "peter" || botName === "prod";
-    return matchesNames ? "peter" : "thierry";
-}
