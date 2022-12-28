@@ -5,6 +5,9 @@ const botConfig = require(`./secrets/${arguments.bot}.json`);
 const fs = require("node:fs");
 const path = require('node:path');
 const {REST} = require("@discordjs/rest");
+const jsdom = require('jsdom');
+const dom = new jsdom.JSDOM("");
+const jquery = require('jquery')(dom.window);
 
 const client = new Client({intents: [GatewayIntentBits.Guilds]});
 client.commands = new Collection();
@@ -47,8 +50,8 @@ client.on('interactionCreate', async interaction => {
     if (!command) return;
 
     try {
-        await command.execute(client, interaction);
-        console.log(interaction.user.username + " heeft commando " + interaction.commandName + " uitgevoerd");
+        await command.execute(client, interaction, jquery);
+        console.log(`user: ${interaction.user.username}, has used command: ${interaction.commandName}`);
     } catch (error) {
         console.log(error);
         await interaction.reply({content: 'There was an error while executing this command!', ephemeral: true});
@@ -56,21 +59,3 @@ client.on('interactionCreate', async interaction => {
 });
 
 client.login(botConfig.token);
-
-
-//function botSelector(args) {
-//    const botName =  args?.[2]?.toLowerCase();
-//    const matchesNames = botName === "peter" || botName === "prod";
-//    return matchesNames ? "peter" : "thierry";
-//}
-//
-//function verbositySelector(args, botConfig){
-//    const options = ["high", "low"]
-//    let verbosity;
-//    if(options.includes(args?.[3])){
-//        verbosity = args[3];
-//        console.log(verbosity + "a")
-//    }
-//
-//    return verbosity;
-//}
