@@ -3,6 +3,9 @@ const botConfig = require(`./secrets/${botSelector(process.argv)}.json`);
 const fs = require("node:fs");
 const path = require('node:path');
 const {REST} = require("@discordjs/rest");
+const jsdom = require('jsdom');
+const dom = new jsdom.JSDOM("");
+const jquery = require('jquery')(dom.window);
 
 const client = new Client({intents: [GatewayIntentBits.Guilds]});
 client.commands = new Collection();
@@ -43,7 +46,7 @@ client.on('interactionCreate', async interaction => {
     if (!command) return;
 
     try {
-        await command.execute(client, interaction);
+        await command.execute(client, interaction, jquery);
         console.log(`user: ${interaction.user.username}, has used command: ${interaction.commandName}`);
     } catch (error) {
         console.log(error);

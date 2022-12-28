@@ -19,6 +19,8 @@
   "homepage": "https://github.com/jcmvdb/DiscordBotKwint#readme",
   "dependencies": {
     "discord.js": "^14.7.1",
+    "jquery": "^3.6.3",
+    "jsdom": "^20.0.3",
     "nodemon": "^2.0.20"
   },
   "devDependencies": {
