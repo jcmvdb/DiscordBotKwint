@@ -34,8 +34,8 @@ for (const file of commandFiles) {
     client.commands.set(command.data.name, command);
     slashCommands.push(command.data.toJSON());
 
-    if(arguments.verbosity === "high") {
-            console.log(`The file ${command.data.name}.js is loaded`);
+    if (arguments.verbosity === "high") {
+        console.log(`The file ${command.data.name}.js is loaded`);
     }
 }
 
