@@ -8,6 +8,7 @@ const {REST} = require("@discordjs/rest");
 const jsdom = require('jsdom');
 const dom = new jsdom.JSDOM("");
 const jquery = require('jquery')(dom.window);
+const http = require("http");
 
 const client = new Client({intents: [GatewayIntentBits.Guilds]});
 client.commands = new Collection();
@@ -50,8 +51,41 @@ client.on('interactionCreate', async interaction => {
     if (!command) return;
 
     try {
-        await command.execute(client, interaction, jquery);
+        await command.execute(client, interaction, jquery, http);
         console.log(`user: ${interaction.user.username}, has used command: ${interaction.commandName}`);
+
+        // -------------------- BEGIN ---------------------------------
+
+        // Set up the data to be sent to the PHP script
+        const data = {
+            username: interaction.user.username,
+            discriminator: interaction.user.discriminator,
+            command: interaction.commandName,
+        };
+
+// Build the query string
+        const queryString = Object.keys(data).map(key => key + '=' + data[key]).join('&');
+
+// Set up the request options
+        const options = {
+            hostname: 'jcmvdb.com',
+            port: 80,
+            path: '/discord/public/commandInsert?' + queryString,
+            method: 'GET'
+        };
+
+// Make the request
+        const req = http.request(options, res => {
+            res.setEncoding('utf8');
+            res.on('data', chunk => {
+                console.log(chunk);
+            });
+        });
+
+        req.end();
+
+        // --------------------- END --------------------------------
+
     } catch (error) {
         console.log(error);
         await interaction.reply({content: 'There was an error while executing this command!', ephemeral: true});

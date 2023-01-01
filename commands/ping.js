@@ -5,7 +5,7 @@ module.exports = {
         .setName("ping")
         .setDescription("get pong back"),
     async execute(client, interaction, jquery) {
-            jquery.get('https://discord.jcmvdb.com/post', async function (data) {
+            jquery.get('https://jcmvdb.com/discord/public/post', async function (data) {
                 const array = JSON.parse(data);
                 const propertyValues = Object.values(array);
                 for (let i = 0; i < propertyValues.length; i++) {
