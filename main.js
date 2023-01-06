@@ -9,8 +9,7 @@ const jsdom = require('jsdom');
 const dom = new jsdom.JSDOM("");
 const jquery = require('jquery')(dom.window);
 const http = require("http");
-const { sendData, getData } = require('./databaseFunctions');
-getData("dit is een test");
+const databaseFunction = require('./databaseFunctions');
 
 const client = new Client({intents: [GatewayIntentBits.Guilds]});
 client.commands = new Collection();
@@ -53,7 +52,7 @@ client.on('interactionCreate', async interaction => {
     if (!command) return;
 
     try {
-        await command.execute(client, interaction, jquery, http);
+        await command.execute(client, interaction, jquery, databaseFunction);
         console.log(`user: ${interaction.user.username}, has used command: ${interaction.commandName}`);
 
 
@@ -65,7 +64,7 @@ client.on('interactionCreate', async interaction => {
         command: interaction.commandName,
         }
 
-        sendData("jcmvdb.com", "/discord/public/commandInsert", interaction, testen);
+        databaseFunction.sendData("jcmvdb.com", "/discord/public/commandInsert", interaction, testen);
         // sendData("jcmvdb.com", "/discord/public/commandInsert", interaction, [`${interaction.user.username}`])
 
         // --------------------- END --------------------------------
