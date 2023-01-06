@@ -12,9 +12,7 @@ function getData(path) {
     })
 }
 
-function sendData(hostname, path, interaction, extraData) {
-    let data = extraData;
-
+function sendData(hostname, path, interaction, data) {
 // Build the query string
     const queryString = Object.keys(data).map(key => key + '=' + data[key]).join('&').replaceAll(" ", "%20");
 // Set up the request options
