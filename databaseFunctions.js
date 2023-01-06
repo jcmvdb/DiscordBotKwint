@@ -13,11 +13,10 @@ function getData(path) {
     // });
     const url = "https://jcmvdb.com/discord/public/post"
     const fetchPromise = fetch(url);
-    fetchPromise.then(async res =>  {
-        const json = await res.json()
-
-        return json;
+    returnvalue = fetchPromise.then(async res =>  {
+        return res.json();
     })
+    return returnvalue
 }
 
 function sendData(hostname, path, interaction, extraData) {
