@@ -5,18 +5,11 @@ const http = require("http");
 const secret = require("./secrets/secrets.json");
 
 function getData(path) {
-    // jquery.get(`https://jcmvdb.com/${path}`, async function (data) {
-        // const array = JSON.parse(data);
-        // console.log(Object.values(array)) ;
-        // return Object.values(array);
-        // return data;
-    // });
-    const url = "https://jcmvdb.com/discord/public/post"
+    const url = `https://jcmvdb.com/${path}`;
     const fetchPromise = fetch(url);
-    returnvalue = fetchPromise.then(async res =>  {
+    return fetchPromise.then(async res => {
         return res.json();
     })
-    return returnvalue
 }
 
 function sendData(hostname, path, interaction, extraData) {

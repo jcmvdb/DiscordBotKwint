@@ -1,5 +1,5 @@
 const {SlashCommandBuilder} = require('discord.js');
-// const http = require("http");
+const databaseFunction = require("../databaseFunctions");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -13,41 +13,21 @@ module.exports = {
             option.setName("text")
                 .setDescription("description")
                 .setRequired(true)),
-    async execute(client, interaction, jquery, http) {
+    async execute(client, interaction, jquery, databaseFunctions) {
         // const noOption = 'Er is geen reden gegeven';
         // let test = interaction.options.getString('input');
         let title = interaction.options.getString("title");
         let text = interaction.options.getString("text");
 
 
-        await interaction.reply(`Title:\n**${title}**\n\nText\n**${text}**`);
-
-// Set up the data to be sent to the PHP script
-        const data = {
+        const dataToSend = {
             title: title,
-            text: text
-        };
+            text: text,
+        }
 
-// Build the query string
-        const queryString = Object.keys(data).map(key => key + '=' + data[key]).join('&');
+        databaseFunctions.sendData("jcmvdb.com", "/discord/public/test", interaction, dataToSend);
 
-// Set up the request options
-        const options = {
-            hostname: 'jcmvdb.com',
-            port: 80,
-            path: '/discord/public/test?' + queryString,
-            method: 'GET'
-        };
-
-// Make the request
-        const req = http.request(options, res => {
-            res.setEncoding('utf8');
-            res.on('data', chunk => {
-                console.log(chunk);
-            });
-        });
-
-        req.end();
+        await interaction.reply(`Title:\n**${title}**\n\nText\n**${text}**`);
 
     },
 };
