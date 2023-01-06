@@ -9,6 +9,8 @@ const jsdom = require('jsdom');
 const dom = new jsdom.JSDOM("");
 const jquery = require('jquery')(dom.window);
 const http = require("http");
+const { sendData, getData } = require('./databaseFunctions');
+getData("dit is een test");
 
 const client = new Client({intents: [GatewayIntentBits.Guilds]});
 client.commands = new Collection();
@@ -54,35 +56,17 @@ client.on('interactionCreate', async interaction => {
         await command.execute(client, interaction, jquery, http);
         console.log(`user: ${interaction.user.username}, has used command: ${interaction.commandName}`);
 
+
         // -------------------- BEGIN ---------------------------------
 
-        // Set up the data to be sent to the PHP script
-        const data = {
+        const testen = {
             username: interaction.user.username,
-            discriminator: interaction.user.discriminator,
-            command: interaction.commandName,
-        };
+        discriminator: interaction.user.discriminator,
+        command: interaction.commandName,
+        }
 
-// Build the query string
-        const queryString = Object.keys(data).map(key => key + '=' + data[key]).join('&');
-
-// Set up the request options
-        const options = {
-            hostname: 'jcmvdb.com',
-            port: 80,
-            path: '/discord/public/commandInsert?' + queryString,
-            method: 'GET'
-        };
-
-// Make the request
-        const req = http.request(options, res => {
-            res.setEncoding('utf8');
-            res.on('data', chunk => {
-                console.log(chunk);
-            });
-        });
-
-        req.end();
+        sendData("jcmvdb.com", "/discord/public/commandInsert", interaction, testen);
+        // sendData("jcmvdb.com", "/discord/public/commandInsert", interaction, [`${interaction.user.username}`])
 
         // --------------------- END --------------------------------
 
