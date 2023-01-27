@@ -1,6 +1,7 @@
 const {SlashCommandBuilder} = require("discord.js");
 
 module.exports = {
+    category: "test",
     data: new SlashCommandBuilder()
         .setName("make-project")
         .setDescription("make a new project")
@@ -12,14 +13,13 @@ module.exports = {
             option.setName("prefix")
                 .setDescription("set the prefix for the project")
                 .setRequired(true)),
-    async execute(client, interaction) {
+    async execute(client, interaction, CategoryChannelChildManager,GUILD_CATEGORY) {
         let projectName = interaction.options.getString('name');
         let projectPrefix = interaction.options.getString('prefix');
-        await interaction.reply(`Project name: \n${projectName} \n\nProject prefix:\n${projectPrefix}`);
+        // await interaction.reply(`Project name: \n${projectName} \n\nProject prefix:\n${projectPrefix}`);
 
         // make a category
-
-
+        console.log(client);
 
         // make the channels
         const channels = ["project-description", "general", "files", "ideas"];
@@ -40,6 +40,8 @@ module.exports = {
         // make the message with the role on reaction
 
 
+
+            await interaction.reply(`name:\n${projectName}\n\nPrefix:\n${projectPrefix}`);
 
     }
 }

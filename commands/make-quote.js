@@ -2,6 +2,7 @@ const {SlashCommandBuilder} = require('discord.js');
 const databaseFunction = require("../databaseFunctions");
 
 module.exports = {
+    category: "test",
     data: new SlashCommandBuilder()
         .setName("make-quote")
         .setDescription("Send data to the server using the API")

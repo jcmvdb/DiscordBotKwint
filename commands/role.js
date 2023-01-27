@@ -1,6 +1,7 @@
 const {SlashCommandBuilder, ApplicationCommandOptionWithChoicesAndAutocompleteMixin} = require('discord.js');
 
 module.exports = {
+    category: "test",
     data: new SlashCommandBuilder()
         .setName("role")
         .setDescription("Description"),

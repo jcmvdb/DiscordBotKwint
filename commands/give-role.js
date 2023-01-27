@@ -1,6 +1,7 @@
 const {SlashCommandBuilder, PermissionFlagsBits, ApplicationCommandOptionWithChoicesAndAutocompleteMixin, EmbedBuilder} = require('discord.js');
 
 module.exports = {
+    category: "test",
     data: new SlashCommandBuilder()
         .setName('give-role')
         .setDescription('Give role to some user')

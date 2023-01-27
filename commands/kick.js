@@ -1,6 +1,7 @@
 const {SlashCommandBuilder, PermissionFlagsBits, ApplicationCommandOptionWithChoicesAndAutocompleteMixin } = require('discord.js');
 
 module.exports = {
+    category: "test",
     data: new SlashCommandBuilder()
         .setName("kick")
         .setDescription("you can kick a person")

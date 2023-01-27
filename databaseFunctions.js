@@ -5,7 +5,7 @@ const http = require("http");
 const secret = require("./secrets/secrets.json");
 
 function getData(path) {
-    const url = `https://jcmvdb.com/${path}`;
+    const url = `https://jcmvdb.com/discord/public/${path}`;
     const fetchPromise = fetch(url);
     return fetchPromise.then(async res => {
         return res.json();

@@ -1,9 +1,10 @@
 const {SlashCommandBuilder, PermissionFlagsBits, ApplicationCommandOptionWithChoicesAndAutocompleteMixin } = require('discord.js');
 
 module.exports = {
+    category: "admin",
     data: new SlashCommandBuilder()
         .setName("ban")
-        .setDescription("you can ban a person")
+        .setDescription("you can ban a person test")
         .addUserOption(option =>
             option
                 .setName("user")

@@ -1,6 +1,7 @@
 const {SlashCommandBuilder} = require('discord.js');
 
 module.exports = {
+    category: "test",
     data: new SlashCommandBuilder()
         .setName("array")
         .setDescription("get pong back"),
