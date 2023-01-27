@@ -16,6 +16,8 @@ const client = new Client({intents: [GatewayIntentBits.Guilds]});
 client.commands = new Collection();
 const slashCommands = [];
 
+//
+//      ===Runs on startup===
 client.once("ready", () => {
     console.log(`${client.user.username} is online!`);
 
@@ -45,6 +47,8 @@ for (const file of commandFiles) {
     }
 }
 
+
+// === runs on interactions ===
 client.on('interactionCreate', async interaction => {
     if (!interaction.isChatInputCommand()) return;
 
