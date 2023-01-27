@@ -1,6 +1,5 @@
-const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require("discord.js")
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js")
 const secrets = require("../secrets/secrets.json")
-const botembed = require("./botembed")
 
 module.exports = {
     data: new SlashCommandBuilder()
