@@ -1,4 +1,4 @@
-const {SlashCommandBuilder, Guild, ChannelType} = require("discord.js");
+const {SlashCommandBuilder, Guild, ChannelType, PermissionsBitField} = require("discord.js");
 
 module.exports = {
     category: "test",
@@ -13,37 +13,52 @@ module.exports = {
             option.setName("prefix")
                 .setDescription("set the prefix for the project")
                 .setRequired(true)),
-    async execute(client, interaction, CategoryChannelChildManager,GUILD_CATEGORY) {
+    async execute(client, interaction, CategoryChannelChildManager, GUILD_CATEGORY) {
         let projectName = interaction.options.getString('name');
         let projectPrefix = interaction.options.getString('prefix');
         // await interaction.reply(`Project name: \n${projectName} \n\nProject prefix:\n${projectPrefix}`);
 
-        // make a category
-        interaction.guild.channels.create({name : "Test", type: ChannelType.GuildCategory })
-        //console.log(client);
+
+        // make the role
+        const role = await interaction.guild.roles.create({
+            name: `${projectName}`,
+            color: "#2f7a93"
+        });
+        // gives the role to the maker of the command
+        interaction.member.roles.add(role);
+
+        console.log(role);
+        // make the category
+
+        // const roletest = interaction.guild.roles.cache.find(role => role.name === "owner");
+        const randCat = await interaction.guild.channels.create({
+            name : projectName,
+            type: ChannelType.GuildCategory,
+            permissionOverwrites: [
+                {
+                    id: interaction.guild.id,
+                    deny: [PermissionsBitField.Flags.ViewChannel],
+                },
+                {
+                    id: role.id,
+                    allow: [PermissionsBitField.Flags.ViewChannel],
+                }
+                ]
+        });
+
 
         // make the channels
         const channels = ["project-description", "general", "files", "ideas"];
-        const emptyArray = [];
-        channels.forEach(myFunction)
-        
+        channels.forEach(
+            element =>
+                interaction.guild.channels.create({
+                name: `${projectPrefix}-${element}`,
+                type: ChannelType.GuildText,
+                parent: randCat
+            })
+        );
 
-        async function myFunction(item) {
-            // await interaction.reply(`${item}`)
-            console.log(`${projectPrefix}-${item}`);
-            emptyArray.push(`${projectPrefix}-${item}`);
-        }
-        console.log(emptyArray);
-
-        // make the role
-
-
-
-        // make the message with the role on reaction
-
-
-
-            await interaction.reply(`name:\n${projectName}\n\nPrefix:\n${projectPrefix}`);
+        await interaction.reply(`name:\n${projectName}\n\nPrefix:\n${projectPrefix}`);
 
     }
 }
