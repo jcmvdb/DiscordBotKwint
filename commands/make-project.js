@@ -1,4 +1,4 @@
-const {SlashCommandBuilder} = require("discord.js");
+const {SlashCommandBuilder, Guild, ChannelType} = require("discord.js");
 
 module.exports = {
     category: "test",
@@ -19,12 +19,14 @@ module.exports = {
         // await interaction.reply(`Project name: \n${projectName} \n\nProject prefix:\n${projectPrefix}`);
 
         // make a category
-        console.log(client);
+        interaction.guild.channels.create({name : "Test", type: ChannelType.GuildCategory })
+        //console.log(client);
 
         // make the channels
         const channels = ["project-description", "general", "files", "ideas"];
         const emptyArray = [];
         channels.forEach(myFunction)
+        
 
         async function myFunction(item) {
             // await interaction.reply(`${item}`)
