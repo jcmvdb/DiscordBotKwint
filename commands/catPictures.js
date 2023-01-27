@@ -1,15 +1,14 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js")
-const secrets = require("../secrets/secrets.json")
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("cat")
         .setDescription("get a free cat pictrue"),
 
-    async execute(client, interaction) {
+    async execute(client, interaction, secret) {
         const catApiURL = "https://api.thecatapi.com/v1/"
         const headers = {
-            "x-api-key": `${secrets.catKey}`,
+            "x-api-key": `${secret.catKey}`,
             "Content-Type": "application/json",
         }
         

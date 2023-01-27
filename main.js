@@ -2,6 +2,7 @@ const args = require("./argumentHandling")
 const {Client, GatewayIntentBits, Routes, Collection, CategoryChannelChildManager, GUILD_CATEGORY} = require("discord.js");
 const arguments = args.argHandler(process.argv);
 const botConfig = require(`./secrets/${arguments.bot}.json`);
+const secret = require('./secrets/secrets.json');
 const fs = require("node:fs");
 const path = require('node:path');
 const {REST} = require("@discordjs/rest");
@@ -52,7 +53,7 @@ client.on('interactionCreate', async interaction => {
     if (!command) return;
 
     try {
-        await command.execute(client, interaction, jquery, databaseFunction, CategoryChannelChildManager,GUILD_CATEGORY);
+        await command.execute(client, interaction, jquery, databaseFunction, CategoryChannelChildManager,GUILD_CATEGORY, secret);
         console.log(`user: ${interaction.user.username}, has used command: ${interaction.commandName}`);
 
 
