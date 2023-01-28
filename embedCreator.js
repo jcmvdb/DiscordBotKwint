@@ -10,19 +10,14 @@ function createEmbed(embedDTO, colour=generateRandomColour()) {
         .setColor(colour)
         .setFooter({text: "kaas"})
         .setTimestamp()
-
-
-
+ 
     return embed;
 }
 
 function generateRandomColour(){
-    let string = "";
-    for(let i = 0; i < 3; i++){
-        string += Math.floor(Math.random() * 256).toString(16)
-        console.log(string)
-    }
-    return string
+    const colour = "#" + Math.floor(Math.random() * 16777215).toString(16); 
+    console.log(colour);
+    return colour;
 }
 module.exports = {
     createEmbed
