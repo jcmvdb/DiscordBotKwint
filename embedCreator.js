@@ -1,5 +1,4 @@
 const { EmbedBuilder }  = require("discord.js");
-const embed = require("./commands/embed");
 //
 //embedDTO expects fields of
 // title as String
@@ -9,35 +8,25 @@ const embed = require("./commands/embed");
 // client
 // interaction
 
-function createEmbed(embedDTO, colour=generateRandomColour(), image) {
-    let embed;
-    if(image == null) {
-        embed = new EmbedBuilder()
-            .setTitle(embedDTO.title)
-            .addFields(embedDTO.fields)
-            .setDescription(embedDTO.description)
-            .setAuthor({name :embedDTO.interaction.member.user.username})
-            .setColor(colour)
-            .setFooter({text: embedDTO.footer})
-            .setTimestamp()
-    } else {
-        embed = new EmbedBuilder()
-            .setTitle(embedDTO.title)
-            .addFields(embedDTO.fields)
-            .setDescription(embedDTO.description)
-            .setAuthor({name :embedDTO.interaction.member.user.username})
-            .setColor(colour)
-            .setFooter({text: embedDTO.footer})
-            .setTimestamp()
-            .setImage(image)
+function createEmbed(embedDTO, image, colour=generateRandomColour() ) {
+    const embed = new EmbedBuilder()
+        .setTitle(embedDTO.title)
+        .addFields(embedDTO.fields)
+        .setDescription(embedDTO.description)
+        .setAuthor({name :embedDTO.interaction.member.user.username})
+        .setColor(colour)
+        .setFooter({text: embedDTO.footer})
+        .setTimestamp()
+    if(image){
+        embed.setImage(image)
     }
-        
+    
     return embed;
+
 }
 
 function generateRandomColour(){
     const colour = "#" + Math.floor(Math.random() * 16777215).toString(16); 
-
     return colour;
 }
 module.exports = {
