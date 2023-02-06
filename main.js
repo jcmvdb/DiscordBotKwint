@@ -11,6 +11,7 @@ const dom = new jsdom.JSDOM("");
 const jquery = require('jquery')(dom.window);
 const http = require("http");
 const databaseFunction = require('./databaseFunctions');
+const errorHandling = require("./errorHandling")
 
 const client = new Client({intents: [GatewayIntentBits.Guilds]});
 client.commands = new Collection();
@@ -59,7 +60,7 @@ client.on('interactionCreate', async interaction => {
     if (!command) return;
 
     try {
-        await command.execute(client, interaction, jquery, databaseFunction, CategoryChannelChildManager,GUILD_CATEGORY, secret);
+        await command.execute(client, interaction, jquery, databaseFunction, CategoryChannelChildManager,GUILD_CATEGORY, secret, errorHandling);
         console.log(`user: ${interaction.user.username}, has used command: ${interaction.commandName}`);
 
 

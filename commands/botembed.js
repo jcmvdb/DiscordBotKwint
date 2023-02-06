@@ -5,8 +5,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("botembed")
         .setDescription("This is a embed test"),
-    async execute(client, interaction) {
-
+    async execute(client, interaction, errorHandling) {
         const botEmbed = new EmbedBuilder()
             .setTitle("Title")
             .setDescription("Description")
@@ -18,6 +17,7 @@ module.exports = {
             .setFooter({text: "Footer"})
             .setAuthor({name: interaction.member.user.username});
 
-        await interaction.reply({embeds: [botEmbed]})
+        await interaction.reply({embeds: [botEmbed]}).catch(
+            err => errorHandling.errorHandler(err))
     },
 };
