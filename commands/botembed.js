@@ -1,11 +1,12 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const errorHandling = require("../errorHandling")
 
 module.exports = {
     category: "test",
     data: new SlashCommandBuilder()
         .setName("botembed")
         .setDescription("This is a embed test"),
-    async execute(client, interaction, errorHandling) {
+    async execute(client, interaction, secret) {
         const botEmbed = new EmbedBuilder()
             .setTitle("Title")
             .setDescription("Description")

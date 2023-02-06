@@ -1,4 +1,4 @@
-const {SlashCommandBuilder, Guild, ChannelType, PermissionsBitField} = require("discord.js");
+const {SlashCommandBuilder, ChannelType, PermissionsBitField, CategoryChannelChildManager, GuildCategory} = require("discord.js");
 
 module.exports = {
     category: "test",
@@ -13,9 +13,9 @@ module.exports = {
             option.setName("prefix")
                 .setDescription("set the prefix for the project")
                 .setRequired(true)),
-    async execute(client, interaction, CategoryChannelChildManager, GUILD_CATEGORY) {
-        let projectName = interaction.options.getString('name');
-        let projectPrefix = interaction.options.getString('prefix');
+    async execute(client, interaction, secret) {
+        const projectName = interaction.options.getString('name');
+        const projectPrefix = interaction.options.getString('prefix');
         // await interaction.reply(`Project name: \n${projectName} \n\nProject prefix:\n${projectPrefix}`);
 
 
@@ -30,8 +30,7 @@ module.exports = {
         console.log(role);
         // make the category
 
-        // const roletest = interaction.guild.roles.cache.find(role => role.name === "owner");
-        const randCat = await interaction.guild.channels.create({
+        const category = await interaction.guild.channels.create({
             name : projectName,
             type: ChannelType.GuildCategory,
             permissionOverwrites: [
@@ -54,11 +53,10 @@ module.exports = {
                 interaction.guild.channels.create({
                 name: `${projectPrefix}-${element}`,
                 type: ChannelType.GuildText,
-                parent: randCat
+                parent: category
             })
         );
 
         await interaction.reply(`name:\n${projectName}\n\nPrefix:\n${projectPrefix}`);
-
     }
 }

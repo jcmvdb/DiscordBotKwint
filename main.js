@@ -1,15 +1,11 @@
 const args = require("./argumentHandling")
-const {Client, GatewayIntentBits, Routes, Collection, CategoryChannelChildManager, GUILD_CATEGORY} = require("discord.js");
+const { Client, GatewayIntentBits, Routes, Collection } = require("discord.js");
 const arguments = args.argHandler(process.argv);
 const botConfig = require(`./secrets/${arguments.bot}.json`);
 const secret = require('./secrets/secrets.json');
 const fs = require("node:fs");
 const path = require('node:path');
-const {REST} = require("@discordjs/rest");
-const jsdom = require('jsdom');
-const dom = new jsdom.JSDOM("");
-const jquery = require('jquery')(dom.window);
-const http = require("http");
+const { REST } = require("@discordjs/rest");
 const databaseFunction = require('./databaseFunctions');
 const errorHandling = require("./errorHandling")
 
@@ -60,23 +56,17 @@ client.on('interactionCreate', async interaction => {
     if (!command) return;
 
     try {
-        await command.execute(client, interaction, jquery, databaseFunction, CategoryChannelChildManager,GUILD_CATEGORY, secret, errorHandling);
+        await command.execute(client, interaction, secret);
         console.log(`user: ${interaction.user.username}, has used command: ${interaction.commandName}`);
 
-
-        // -------------------- BEGIN ---------------------------------
-
-        const testen = {
+        const commandDTO = {
             username: interaction.user.username,
-        discriminator: interaction.user.discriminator,
-        command: interaction.commandName,
+            discriminator: interaction.user.discriminator,
+            command: interaction.commandName,
         }
 
-        databaseFunction.sendData("jcmvdb.com", "/discord/public/commandInsert", interaction, testen);
-        // sendData("jcmvdb.com", "/discord/public/commandInsert", interaction, [`${interaction.user.username}`])
-
-        // --------------------- END --------------------------------
-
+        databaseFunction.sendData("jcmvdb.com", "/discord/public/commandInsert", interaction, commandDTO);
+    
     } catch (error) {
         console.log(error);
         await interaction.reply({content: 'There was an error while executing this command!', ephemeral: true});

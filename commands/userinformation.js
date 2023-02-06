@@ -9,7 +9,7 @@ module.exports = {
             option.setName('user')
                 .setDescription("select a user")
         ),
-    async execute(client, interaction) {
+    async execute(client, interaction, secret) {
         const joinDate = new Date(interaction.member.joinedTimestamp).getDate();
         const joinDay = new Date(interaction.member.joinedTimestamp).getDay();
         const joinMonth = new Date(interaction.member.joinedTimestamp).getMonth();

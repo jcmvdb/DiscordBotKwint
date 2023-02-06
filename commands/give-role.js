@@ -1,4 +1,4 @@
-const {SlashCommandBuilder, PermissionFlagsBits, ApplicationCommandOptionWithChoicesAndAutocompleteMixin, EmbedBuilder} = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } = require('discord.js');
 
 module.exports = {
     category: "test",
@@ -19,7 +19,7 @@ module.exports = {
         )
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles),
 
-    async execute(client, interaction) {
+    async execute(client, interaction, secret) {
         let member = interaction.options.getMember("username")
         let role = interaction.options.getRole("role");
         member.roles.add(role);

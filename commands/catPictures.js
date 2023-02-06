@@ -1,7 +1,8 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js")
+const { SlashCommandBuilder } = require("discord.js")
 const embedCreator = require("../embedCreator")
 
 module.exports = {
+    category: "test",
     data: new SlashCommandBuilder()
         .setName("cat")
         .setDescription("get a free cat pictrue"),

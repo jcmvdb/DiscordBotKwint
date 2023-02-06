@@ -6,17 +6,18 @@ module.exports = {
         // .setCateogry("wat")
         .setName("commands")
         .setDescription("get the full list of all commands"),
-    async execute(client, interaction, CategoryChannelChildManager,GUILD_CATEGORY) {
+    async execute(client, interaction, secret) {
         let command = client.commands;
         // console.log(command);
-        let text = "**Commands**";
+        const text = "**Commands**";
         let testCommands = "\n\n**TestCommands:**\n\n";
         let testCommandCount = 0;
-        let adminCommands = "\n\n**Admin Commands:**\n\n";
+        const adminCommands = "\n\n**Admin Commands:**\n\n";
         let adminCount = 0;
-        let miscellaneousCommands = "\n\n**Miscellaneous:**\n\n";
+        const miscellaneousCommands = "\n\n**Miscellaneous:**\n\n";
         let miscellaneousCommandCount = 0;
-        function myFunction(item, index) {
+
+        function categorize(item, index) {
             if (item.category === "test") {
                 testCommandCount++;
                 testCommands += `/${index} - ${item.data.description}\n`;
@@ -28,7 +29,7 @@ module.exports = {
                 miscellaneousCommands += `/${index} - ${item.data.description}\n`;
             }
         }
-        command.forEach(myFunction);
+        command.forEach(categorize);
         console.log(testCommandCount);
         if (testCommandCount > 0) {
             text += testCommands;

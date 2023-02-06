@@ -5,7 +5,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("ping")
         .setDescription("get pong back"),
-        async execute(client, interaction, jquery, databaseFunctions) {
+        async execute(client, interaction, secret) {
             const data = await databaseFunctions.getData("post")
             const propertyValues = Object.values(data);
             const number = propertyValues.length;

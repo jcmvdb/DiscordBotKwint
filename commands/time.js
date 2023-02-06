@@ -5,7 +5,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("time")
         .setDescription("see the current time"),
-    async execute(client, interaction) {
+    async execute(client, interaction, secret) {
         const time = new Date();
         console.log(time)
 
@@ -27,17 +27,5 @@ module.exports = {
 
 
 
-        // const botEmbed = new EmbedBuilder()
-        //     .setTitle("Time")
-        //     .setDescription("")
-        //     .setColor("#f1d02a")
-        //     .addFields(
-        //         {name: "Bot name", value: client.user.username}
-        //     )
-        //     .setTimestamp()
-        //     .setFooter({text: "Footer"})
-        //     .setAuthor({name: interaction.member.user.username});
-        //
-        // await interaction.reply({embeds: [botEmbed]})
     },
 };

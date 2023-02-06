@@ -14,19 +14,19 @@ module.exports = {
             option.setName("text")
                 .setDescription("description")
                 .setRequired(true)),
-    async execute(client, interaction, jquery, databaseFunctions) {
+    async execute(client, interaction, secret) {
         // const noOption = 'Er is geen reden gegeven';
         // let test = interaction.options.getString('input');
-        let title = interaction.options.getString("title");
-        let text = interaction.options.getString("text");
+        const title = interaction.options.getString("title");
+        const text = interaction.options.getString("text");
 
 
         const dataToSend = {
-            title: title,
-            text: text,
+            title,
+            text
         }
 
-        databaseFunctions.sendData("jcmvdb.com", "/discord/public/test", interaction, dataToSend);
+        databaseFunction.sendData("jcmvdb.com", "/discord/public/test", interaction, dataToSend);
 
         await interaction.reply(`Title:\n**${title}**\n\nText\n**${text}**`);
 
