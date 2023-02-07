@@ -7,18 +7,20 @@ const { EmbedBuilder }  = require("discord.js");
 // footer as String
 // client
 // interaction
+// (optional) image as a url
 
-function createEmbed(embedDTO, image, colour=generateRandomColour() ) {
+function createEmbed(embedDTO, colour=generateRandomColour()) {
+
     const embed = new EmbedBuilder()
         .setTitle(embedDTO.title)
         .addFields(embedDTO.fields)
         .setDescription(embedDTO.description)
-        .setAuthor({name :embedDTO.interaction.member.user.username})
+        .setAuthor({name:embedDTO.interaction.member.user.username})
         .setColor(colour)
         .setFooter({text: embedDTO.footer})
         .setTimestamp()
-    if(image){
-        embed.setImage(image)
+    if(embedDTO.image){
+        embed.setImage(embedDTO.image)
     }
     
     return embed;
@@ -26,8 +28,7 @@ function createEmbed(embedDTO, image, colour=generateRandomColour() ) {
 }
 
 function generateRandomColour(){
-    const colour = "#" + Math.floor(Math.random() * 16777215).toString(16); 
-    return colour;
+    return Math.floor(Math.random() * 16777215).toString(16);
 }
 module.exports = {
     createEmbed
