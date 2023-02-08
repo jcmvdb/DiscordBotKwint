@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const errorHandling = require("../errorHandling")
+const embedCreator = require("../embedCreator")
 
 module.exports = {
     category: "admin",
@@ -13,29 +14,51 @@ module.exports = {
         .addStringOption(option =>
             option.setName('reason')
                 .setDescription('give reason to ban'))
+        .addIntegerOption(option =>
+            option.setName("delete-messages")
+                .setDescription("How many days of messages to delete"))
         .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
 
     async execute(client, interaction, secret) {
-        const ownerRole = interaction.guild.roles.cache.find(r => r.name.toLowerCase() === "owner");
         const member = interaction.options.getMember("user");
-        const reason =  interaction.options.getString("reason");
+        const reason = interaction.options.getString("reason") ?? "none provided";
+        const deleteMessageDays = interaction.options.getInteger("delete-messages") 
         
-        if (member.roles.cache.has(ownerRole.id)) {
-            await interaction.reply("Deze persoon kan je niet bannen");
+        if (member.permissions.has([PermissionFlagsBits.Administrator])) {
+            interaction.reply({content: "You can't ban this user because they're an administrator", ephemeral: true});
             return;
         }
+
+        await member.send(`You've been banned from Programming Bitches with the reason of : ${reason}`)
+            .catch(err => errorHandling.errorHandler(err)
+        );
         
-        await member.send(`Youre banned with the reason of : \n ${reason}`).catch(() => {
-            interaction.channel.send(`this bitch has DM closed`);
-        });
 
-        await member.ban({ days: 0, reason: reason}).catch(err => {
-            errorHandling.errorHandler(err)
-        });
+        const embedDTO = {
 
-        await interaction.reply().catch(err => {
+        }
+        console.log(deleteMessageDays)
+        await member.ban({deleteMessageDays, reason}).then(
+            interaction.reply({embeds : [embedCreator.createEmbed()], ephemeral: true})
+        ).catch( err =>
             errorHandling.errorHandler(err)
-        })
+        );
+        // if (member.roles.cache.has(ownerRole.id)) {
+        //     await interaction.reply("Deze persoon kan je niet bannen");
+        //     return;
+        // }
+        
+        // await member.send(`Youre banned with the reason of : \n ${reason}`).catch(() => {
+        //     interaction.channel.send(`this bitch has DM closed`);
+        // });
+
+        // await member.ban({ days: 0, reason: reason}).catch(err => {
+        //     errorHandling.errorHandler(err)
+        // });
+
+        // await interaction.reply().catch(err => {
+        //     errorHandling.errorHandler(err)
+        // })
     },
 
 };
