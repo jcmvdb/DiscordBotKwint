@@ -29,7 +29,7 @@ module.exports = {
             return;
         }
 
-        await member.send(`You've been banned from Programming Bitches with the reason of : ${reason}`)
+        await member.send(`You've been banned from ${interaction.guild.name} with the reason of : ${reason}`)
             .catch(err => errorHandling.errorHandler(err)
         );
         
@@ -43,22 +43,6 @@ module.exports = {
         ).catch( err =>
             errorHandling.errorHandler(err)
         );
-        // if (member.roles.cache.has(ownerRole.id)) {
-        //     await interaction.reply("Deze persoon kan je niet bannen");
-        //     return;
-        // }
-        
-        // await member.send(`Youre banned with the reason of : \n ${reason}`).catch(() => {
-        //     interaction.channel.send(`this bitch has DM closed`);
-        // });
-
-        // await member.ban({ days: 0, reason: reason}).catch(err => {
-        //     errorHandling.errorHandler(err)
-        // });
-
-        // await interaction.reply().catch(err => {
-        //     errorHandling.errorHandler(err)
-        // })
     },
 
 };
