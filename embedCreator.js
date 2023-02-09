@@ -32,7 +32,7 @@ function createBanEmbed(embedDTO, colour=generateRandomColour()) {
         .setFooter({text:"Someone was banned"})
         .setTimestamp()
         .setColor(colour)
-    if(!embedDTO.sentDM) {
+    if(embedDTO.sentDM === false) {
         embed.addFields({name : "No DM sent", value:"No DM has been sent because user has DMs closed"})
     }
     return embed;
@@ -46,7 +46,7 @@ function createKickEmbed(embedDTO, colour=generateRandomColour()) {
         .setFooter({text:"Someone was kicked"})
         .setTimestamp()
         .setColor(colour)
-    if(!embedDTO.sentDM) {
+    if(embedDTO.sentDM === false) {
         embed.addFields({name : "No DM sent", value:"No DM has been sent because user has DMs closed"})
     }
     return embed;
