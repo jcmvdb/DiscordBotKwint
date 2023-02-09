@@ -3,7 +3,7 @@ const { errorHandler } = require('../errorHandling')
 const { createKickEmbed } = require('../embedCreator')
 
 module.exports = {
-    category: "test",
+    category: "admin",
     data: new SlashCommandBuilder()
         .setName("kick")
         .setDescription("you can kick a person")
