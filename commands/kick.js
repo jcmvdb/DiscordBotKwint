@@ -1,4 +1,6 @@
-const {SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js') 
+const { errorHandler } = require('../errorHandling')
+const { createKickEmbed } = require('../embedCreator')
 
 module.exports = {
     category: "test",
@@ -6,35 +8,44 @@ module.exports = {
         .setName("kick")
         .setDescription("you can kick a person")
         .addUserOption(option =>
-            option
-                .setName("user")
-                .setDescription("User that needs to be banned")
+            option.setName("user")
+                .setDescription("User that needs to be kicked")
                 .setRequired(true))
         .addStringOption(option =>
             option.setName('reason')
-                .setDescription('give reason to ban'))
-        .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers | PermissionFlagsBits.KickMembers),
+                .setDescription('give reason to kick'))
+        .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers),
 
     async execute(client, interaction, secret) {
-        const reason = interaction.options.getString("reason") ?? "none provided"
-        const role =  interaction.guild.roles.cache.find(r => r.name.toLowerCase() === "owner");
-        const member = interaction.options.getMember("user")
+        const member = interaction.options.getMember("user");
+        const reason = interaction.options.getString("reason") ?? "none provided";
         
-
-        if(member.roles.cache.has(role.id)) {
-            interaction.reply("You can't kick this person");
+        if (member.permissions.has([PermissionFlagsBits.Administrator])) {
+            await interaction.reply({content: "You can't ban this user because they're an administrator", ephemeral: true});
             return;
         }
-        
 
-        await member.send(`kicked with the reason : \n${reason}`).catch(() => {
-            interaction.reply(`this bitch has DM closed`);
+        let sentDM = true;
+        await member.send(`You've been kicked from ${interaction.guild.name} with the reason of : ${reason}`)
+            .catch(async (err) => {
+                if (err.code == "50007") {
+                    sentDM = false;
+                    return;
+                }
+                errorHandling.errorHandler(err)
         });
-
-        
-        await member.kick({ days: 0, reason: reason}).then(
-            await interaction.reply(`you kicked ${member} for the reason ${reason}`)
-        )
+        const embedDTO = {
+            kickedUser : member,
+            interaction,
+            client,
+            sentDM
+        }
+        await member.kick(reason).then( async () => {
+            await interaction.reply({embeds : [createKickEmbed(embedDTO)]})
+        })
+        .catch( err =>
+            errorHandler(err)
+        );
     },
 
 };

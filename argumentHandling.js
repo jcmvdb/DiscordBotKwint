@@ -33,4 +33,6 @@ function botNameFromArgs(args) {
 }
 
 
-module.exports = {argHandler};
+module.exports = {
+    argHandler
+};

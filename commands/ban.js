@@ -1,6 +1,6 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-const errorHandling = require("../errorHandling")
-const embedCreator = require("../embedCreator")
+const { SlashCommandBuilder, PermissionFlagsBits,  } = require('discord.js');
+const { errorHandler } = require("../errorHandling")
+const { createBanEmbed } = require("../embedCreator")
 
 module.exports = {
     category: "admin",
@@ -16,32 +16,41 @@ module.exports = {
                 .setDescription('give reason to ban'))
         .addIntegerOption(option =>
             option.setName("delete-messages")
-                .setDescription("How many days of messages to delete"))
+                .setDescription("How many days of messages to delete, max seven"))
         .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
 
     async execute(client, interaction, secret) {
         const member = interaction.options.getMember("user");
         const reason = interaction.options.getString("reason") ?? "none provided";
-        const deleteMessageDays = interaction.options.getInteger("delete-messages") 
+        const deleteMessageSeconds = interaction.options.getInteger("delete-messages") * 86400
         
         if (member.permissions.has([PermissionFlagsBits.Administrator])) {
-            interaction.reply({content: "You can't ban this user because they're an administrator", ephemeral: true});
+            await interaction.reply({content: "You can't ban this user because they're an administrator", ephemeral: true});
             return;
         }
 
+
+        let sentDM = true;
         await member.send(`You've been banned from ${interaction.guild.name} with the reason of : ${reason}`)
-            .catch(err => errorHandling.errorHandler(err)
-        );
-        
-
+            .catch(async (err) => {
+                if (err.code == "50007"){
+                    sentDM = false;
+                    return;
+                }
+                errorHandling.errorHandler(err)
+        });
+    
         const embedDTO = {
-
+            bannedUser : member,
+            sentDM,
+            interaction,
+            client
         }
-        console.log(deleteMessageDays)
-        await member.ban({deleteMessageDays, reason}).then(
-            interaction.reply({embeds : [embedCreator.createEmbed()], ephemeral: true})
+        await member.ban({deleteMessageSeconds, reason}).then( async () => {
+            await interaction.reply({embeds : [createBanEmbed(embedDTO)]});
+        }
         ).catch( err =>
-            errorHandling.errorHandler(err)
+            errorHandler(err)
         );
     },
 
