@@ -9,63 +9,74 @@ const { EmbedBuilder } = require('discord.js')
 // interaction
 // (optional) image as a url
 
-function createEmbed(embedDTO, colour=generateRandomColour()) {
+function createEmbed(embedDTO) {
     const embed = new EmbedBuilder()
         .setTitle(embedDTO.title)
         .addFields(embedDTO.fields)
         .setDescription(embedDTO.description)
-        .setAuthor({name:embedDTO.interaction.member.user.username})
-        .setColor(colour)
+        .setColor(embedDTO.colour)
         .setFooter({text: embedDTO.footer})
         .setTimestamp()
     if(embedDTO.image){
         embed.setImage(embedDTO.image)
     }
-    return embed;
-}
-
-function createBanEmbed(embedDTO, colour=generateRandomColour()) {
-    const embed = new EmbedBuilder()
-        .setTitle("Ban")
-        .addFields([{name: "User banned", value: `${embedDTO.bannedUser}`, inline: true}, {name: "Banned By", value: `${embedDTO.interaction.member.user}`, inline: true}])
-        .setDescription( `${embedDTO.bannedUser} banned by ${embedDTO.interaction.member.user}`)
-        .setFooter({text:"Someone was banned"})
-        .setTimestamp()
-        .setColor(colour)
-    if(embedDTO.sentDM === false) {
-        embed.addFields({name : "No DM sent", value:"No DM has been sent because user has DMs closed"})
+    if(embedDTO.author){
+        console.log("reached")
+        embed.setAuthor({name: embedDTO.author})
     }
     return embed;
 }
 
-function createKickEmbed(embedDTO, colour=generateRandomColour()) {
-    const embed =  new EmbedBuilder()
-        .setTitle("Kick")
-        .addFields([{name: "User kicked", value: `${embedDTO.kickedUser}`, inline: true}, {name: "Kicked By", value: `${embedDTO.interaction.member.user}`, inline: true}])
-        .setDescription( `${embedDTO.kickedUser} kicked by ${embedDTO.interaction.member.user}`)
-        .setFooter({text:"Someone was kicked"})
-        .setTimestamp()
-        .setColor(colour)
-    if(embedDTO.sentDM === false) {
-        embed.addFields({name : "No DM sent", value:"No DM has been sent because user has DMs closed"})
+function createBanEmbed(recievedEmbedDTO, colour=generateRandomColour()) {
+    const embedDTO = {
+        title: "Ban",
+        fields: [
+            {name: "User banned", value: `${recievedEmbedDTO.bannedUser}`, inline: true},
+            {name: "Banned by", value: `${recievedEmbedDTO.interaction.member.user}`, inline: true}
+        ],
+        description: `${recievedEmbedDTO.bannedUser} was kicked by ${recievedEmbedDTO.interaction.member.user}`,
+        footer: "Someone was kicked",
+        author: recievedEmbedDTO.interaction.user.username,
+        colour  
     }
-    return embed;
+
+    if(recievedEmbedDTO.sentDM === false){
+        embedDTO.fields[2] = {name : "No DM sent", value:"No DM has been sent because user has DMs closed"}
+    }
+    return createEmbed(embedDTO);
+}
+
+function createKickEmbed(recievedEmbedDTO, colour=generateRandomColour()) {
+    const embedDTO = {
+        title: "Kick",
+        fields: [
+            {name: "User kicked", value: `${recievedEmbedDTO.kickedUser}`, inline: true},
+            {name: "Kicked by", value: `${recievedEmbedDTO.interaction.member.user}`, inline: true}
+        ],
+        description: `${recievedEmbedDTO.kickedUser} was kicked by ${recievedEmbedDTO.interaction.member.user}`,
+        footer: "Someone was kicked",
+        author: recievedEmbedDTO.interaction.user.username,
+        colour  
+    }
+
+    if(recievedEmbedDTO.sentDM === false){
+        embedDTO.fields[2] = {name : "No DM sent", value:"No DM has been sent because user has DMs closed"}
+    }
+    return createEmbed(embedDTO);
 }
 
 function createCatEmbed(recievedEmbedDTO, colour=generateRandomColour()) {
-    const sendEmbedDTO = {
-        title : "here a cat image",
+    const embedDTO = {
+        title : "Here a cat image",
         fields : [{
             name: "Bot", value: recievedEmbedDTO.client.user.username
         }],
         description: "A cat",
         footer: "Image from https://thecatapi.com",
         image : recievedEmbedDTO.image,
-        client: recievedEmbedDTO.client,
-        interaction: recievedEmbedDTO.interaction
+        colour
     }
-
-    return createEmbed(sendEmbedDTO)
+    return createEmbed(embedDTO)
 }
 
 function generateRandomColour(){
