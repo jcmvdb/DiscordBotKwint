@@ -34,12 +34,14 @@ module.exports = {
                 }
                 errorHandling.errorHandler(err)
         });
+
         const embedDTO = {
             kickedUser : member,
             interaction,
             client,
             sentDM
         }
+        
         await member.kick(reason).then( async () => {
             await interaction.reply({embeds : [createKickEmbed(embedDTO)]})
         })

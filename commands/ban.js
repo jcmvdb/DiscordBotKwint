@@ -37,7 +37,7 @@ module.exports = {
                     sentDM = false;
                     return;
                 }
-                errorHandling.errorHandler(err)
+                errorHandler(err)
         });
     
         const embedDTO = {
@@ -46,6 +46,7 @@ module.exports = {
             interaction,
             client
         }
+        
         await member.ban({deleteMessageSeconds, reason}).then( async () => {
             await interaction.reply({embeds : [createBanEmbed(embedDTO)]});
         }
