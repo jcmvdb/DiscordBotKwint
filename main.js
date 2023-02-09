@@ -1,13 +1,14 @@
 const { argHandler } = require("./argumentHandling")
 const { Client, GatewayIntentBits, Routes, Collection } = require("discord.js");
-const arguments  = argHandler(process.argv);
-const botConfig  = require(`./secrets/${arguments.bot}.json`);
-const secret = require('./secrets/secrets.json');
 const { readdirSync } = require("node:fs");
 const { join } = require('node:path');
 const { REST } = require("@discordjs/rest");
 const { sendData } = require('./databaseFunctions');
 const { errorHandler } = require("./errorHandling")
+
+const arguments  = argHandler(process.argv);
+const botConfig  = require(`./secrets/${arguments.bot}.json`);
+const secret = require('./secrets/secrets.json');
 
 const client = new Client({intents: [GatewayIntentBits.Guilds]});
 client.commands = new Collection();
@@ -19,9 +20,9 @@ const slashCommands = [];
 client.once("ready", () => {
     console.log(`${client.user.username} is online!`);
 
-    let guildId = botConfig.guildID;
-    let clientId = botConfig.clientID;
-    let token = botConfig.token;
+    const guildId = botConfig.guildID;
+    const clientId = botConfig.clientID;
+    const token = botConfig.token;
 
     const rest = new REST({version: 10}).setToken(token);
 
