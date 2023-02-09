@@ -1,5 +1,5 @@
-const {SlashCommandBuilder} = require('discord.js');
-const databaseFunction = require("../databaseFunctions");
+const { SlashCommandBuilder } = require('discord.js');
+const { sendData } = require("../databaseFunctions");
 
 module.exports = {
     category: "test",
@@ -26,7 +26,7 @@ module.exports = {
             text
         }
 
-        databaseFunction.sendData("jcmvdb.com", "/discord/public/test", interaction, dataToSend);
+        sendData("jcmvdb.com", "/discord/public/test", interaction, dataToSend);
 
         await interaction.reply(`Title:\n**${title}**\n\nText\n**${text}**`);
 

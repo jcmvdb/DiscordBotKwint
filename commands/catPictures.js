@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js")
-const embedCreator = require("../embedCreator")
+const{ createEmbed } = require("../embedCreator")
 
 module.exports = {
     category: "test",
@@ -30,7 +30,7 @@ module.exports = {
                 response.json()
             ).then( json =>  { 
                 embedDTO.image = json[0].url;
-                interaction.reply({embeds: [embedCreator.createEmbed(embedDTO, "f1d02a")]})  
+                interaction.reply({embeds: [createEmbed(embedDTO, "f1d02a")]})  
             }
                 
             );

@@ -1,4 +1,4 @@
-const {SlashCommandBuilder, ChannelType, PermissionsBitField, CategoryChannelChildManager, GuildCategory} = require("discord.js");
+const { SlashCommandBuilder, ChannelType, PermissionsBitField, CategoryChannelChildManager, GuildCategory } = require("discord.js");
 
 module.exports = {
     category: "test",

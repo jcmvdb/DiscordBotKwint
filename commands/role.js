@@ -1,4 +1,4 @@
-const {SlashCommandBuilder, ApplicationCommandOptionWithChoicesAndAutocompleteMixin} = require('discord.js');
+const { SlashCommandBuilder, ApplicationCommandOptionWithChoicesAndAutocompleteMixin } = require('discord.js');
 
 module.exports = {
     category: "test",
