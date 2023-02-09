@@ -1,5 +1,6 @@
 /secrets
 /.idea
+/.vscode
 /note.txt
 /node_modules
 /note.json
