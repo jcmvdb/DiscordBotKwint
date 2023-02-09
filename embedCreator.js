@@ -52,11 +52,28 @@ function createKickEmbed(embedDTO, colour=generateRandomColour()) {
     return embed;
 }
 
+function createCatEmbed(recievedEmbedDTO, colour=generateRandomColour()) {
+    const sendEmbedDTO = {
+        title : "here a cat image",
+        fields : [{
+            name: "Bot", value: recievedEmbedDTO.client.user.username
+        }],
+        description: "A cat",
+        footer: "Image from https://thecatapi.com",
+        image : recievedEmbedDTO.image,
+        client: recievedEmbedDTO.client,
+        interaction: recievedEmbedDTO.interaction
+    }
+
+    return createEmbed(sendEmbedDTO)
+}
+
 function generateRandomColour(){
     return Math.floor(Math.random() * 16777215).toString(16);
 }
 module.exports = {
     createEmbed,
     createBanEmbed,
-    createKickEmbed
+    createKickEmbed,
+    createCatEmbed
 }
