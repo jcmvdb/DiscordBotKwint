@@ -18,13 +18,12 @@ module.exports = {
         const title = interaction.options.getString("title");
         const text = interaction.options.getString("text");
 
-
         const dataToSend = {
             title,
             text
         }
 
-        databaseFunction.sendData("test", interaction, dataToSend);
+        sendData("test", interaction, dataToSend);
 
         await interaction.reply(`Title:\n**${title}**\n\nText\n**${text}**`);
 
