@@ -15,8 +15,6 @@ module.exports = {
                 .setDescription("description")
                 .setRequired(true)),
     async execute(client, interaction, secret) {
-        // const noOption = 'Er is geen reden gegeven';
-        // let test = interaction.options.getString('input');
         const title = interaction.options.getString("title");
         const text = interaction.options.getString("text");
 
@@ -26,7 +24,7 @@ module.exports = {
             text
         }
 
-        sendData("jcmvdb.com", "/discord/public/test", interaction, dataToSend);
+        databaseFunction.sendData("test", interaction, dataToSend);
 
         await interaction.reply(`Title:\n**${title}**\n\nText\n**${text}**`);
 
