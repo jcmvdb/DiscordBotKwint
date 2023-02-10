@@ -66,7 +66,7 @@ client.on('interactionCreate', async interaction => {
             command: interaction.commandName,
         }
 
-        sendData("jcmvdb.com", "/discord/public/commandInsert", interaction, commandDTO);
+        sendData("commandInsert", interaction, commandDTO);
     
     } catch (err) {
         errorHandler(err)
