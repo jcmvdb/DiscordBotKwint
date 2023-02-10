@@ -7,3 +7,4 @@
 /.fleet
 /aaa.txt
 .DS_store
+/commands/miscTest.js
