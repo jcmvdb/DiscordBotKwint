@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js")
-const{ createCatEmbed } = require("../embedCreator")
+const { createCatEmbed } = require("../embedCreator")
 
 module.exports = {
     category: "test",
@@ -8,13 +8,13 @@ module.exports = {
         .setDescription("get a free cat pictrue"),
 
     async execute(client, interaction, secret) {
-        const catApiURL = "https://api.thecatapi.com/v1/"
+        const URL = "https://api.thecatapi.com/v1/"
         const headers = {
             "x-api-key": `${secret.catKey}`,
             "Content-Type": "application/json",
         }
 
-        fetch(catApiURL.concat("images/search?format=json"), {"method": "GET", headers})
+        fetch(URL.concat("images/search?format=json"), {"method": "GET", headers})
             .then( response =>
                 response.json()
             ).then( json => { 

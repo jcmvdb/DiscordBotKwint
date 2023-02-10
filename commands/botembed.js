@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const errorHandling = require("../errorHandling")
+const { errorHandler } = require("../errorHandling")
 
 module.exports = {
     category: "test",
@@ -19,6 +19,6 @@ module.exports = {
             .setAuthor({name: interaction.member.user.username});
 
         await interaction.reply({embeds: [botEmbed]}).catch(
-            err => errorHandling.errorHandler(err))
+            err => errorHandler(err))
     },
 };
