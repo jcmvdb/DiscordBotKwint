@@ -21,7 +21,7 @@ function sendData(path, interaction, data) {
     };
 
 // Make the request
-    const req = https.request(options, res => {
+    const req = request(options, res => {
         res.setEncoding('utf8');
         res.on('data', chunk => {
             console.log(chunk);
