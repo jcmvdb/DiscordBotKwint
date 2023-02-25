@@ -1,10 +1,10 @@
-const { argHandler } = require("./utils/argumentHandling")
+const { argHandler } = require("./utils/argumentHandling.util")
 const { Client, GatewayIntentBits, Routes, Collection } = require("discord.js");
 const { readdirSync } = require("node:fs");
 const { join } = require('node:path');
 const { REST } = require("@discordjs/rest");
-const { sendData } = require('./utils/databaseFunctions');
-const { errorHandler } = require("./utils/errorHandling")
+const { sendData } = require('./utils/databaseFunctions.util');
+const { errorHandler } = require("./utils/errorHandling.util")
 
 const arguments  = argHandler(process.argv);
 const botConfig  = require(`./secrets/${arguments.bot}.json`);

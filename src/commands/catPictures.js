@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js")
-const { createCatEmbed } = require("../embedCreator")
+const { createCatEmbed } = require("../utils/embedCreator.util")
 
 module.exports = {
     category: "test",

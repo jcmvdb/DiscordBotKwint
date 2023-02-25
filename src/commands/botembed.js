@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { errorHandler } = require("../errorHandling")
+const { errorHandler } = require("../utils/errorHandling")
 
 module.exports = {
     category: "test",

@@ -1,4 +1,4 @@
-const  { errorHandler } = require("./errorHandling")
+const  { errorHandler } = require("./errorHandling.util")
 const secret = require("../../secrets/secrets.json");
 
 function getData(path) {
