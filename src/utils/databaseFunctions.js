@@ -1,5 +1,5 @@
 const  { errorHandler } = require("./errorHandling")
-const secret = require("./secrets/secrets.json");
+const secret = require("../../secrets/secrets.json");
 
 function getData(path) {
     const url = `discord.jcmvdb.com/${path}`;

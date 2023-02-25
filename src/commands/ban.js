@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits,  } = require('discord.js');
 const { errorHandler } = require("../errorHandling")
-const { createBanEmbed } = require("../embedCreator")
+const { createBanEmbed } = require("../utils/errorHandling")
 
 module.exports = {
     category: "admin",

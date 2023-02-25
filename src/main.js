@@ -1,14 +1,14 @@
-const { argHandler } = require("./argumentHandling")
+const { argHandler } = require("./utils/argumentHandling")
 const { Client, GatewayIntentBits, Routes, Collection } = require("discord.js");
 const { readdirSync } = require("node:fs");
 const { join } = require('node:path');
 const { REST } = require("@discordjs/rest");
-const { sendData } = require('./databaseFunctions');
-const { errorHandler } = require("./errorHandling")
+const { sendData } = require('./utils/databaseFunctions');
+const { errorHandler } = require("./utils/errorHandling")
 
 const arguments  = argHandler(process.argv);
 const botConfig  = require(`./secrets/${arguments.bot}.json`);
-const secret = require('./secrets/secrets.json');
+const secret = require('../secrets/secrets.json');
 
 const client = new Client({intents: [GatewayIntentBits.Guilds]});
 client.commands = new Collection();
