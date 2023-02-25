@@ -3,7 +3,7 @@ const { Client, GatewayIntentBits, Routes, Collection } = require("discord.js");
 const { readdirSync } = require("node:fs");
 const { join } = require('node:path');
 const { REST } = require("@discordjs/rest");
-const { sendData } = require('./utils/databaseFunctions.util');
+const { postApiData } = require('./utils/databaseFunctions.util');
 const { errorHandler } = require("./utils/errorHandling.util")
 
 const arguments  = argHandler(process.argv);
@@ -61,12 +61,11 @@ client.on('interactionCreate', async interaction => {
         console.log(`user: ${interaction.user.username}, has used command: ${interaction.commandName}`);
 
         const commandDTO = {
-            username: interaction.user.username,
-            discriminator: interaction.user.discriminator,
             command: interaction.commandName,
+            user_id: interaction.user.id,
         }
 
-        sendData("commandInsert", interaction, commandDTO);
+        postApiData("command/postData", commandDTO, interaction);
     
     } catch (err) {
         errorHandler(err)

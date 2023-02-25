@@ -1,13 +1,6 @@
 const  { errorHandler } = require("./errorHandling.util")
 const secret = require("../../secrets/secrets.json");
 
-function getData(path) {
-    const url = `discord.jcmvdb.com/${path}`;
-    return fetch(url).then(async res => {
-        return res.json();
-    })
-}
-
 function sendData(path, interaction, data) {
     const URL = "https://discord.jcmvdb.com/"
     const queryString = Object.keys(data).map(key => key + '=' + data[key]).join('&').replaceAll(" ", "%20");
@@ -25,19 +18,16 @@ function getApiData(path) {
     });
 }
 
-function postApiData(path) {
-    // const url = `https://discord.jcmvdb.com/api/${path}`;
-    const url = `https://discord.jcmvdb.com/api/command/postData`;
+function postApiData(path, data, interaction) {
+    const url = `https://discord.jcmvdb.com/api/${path}`;
+    console.log(data);
     fetch(url, {
         method: "POST",
-        body: JSON.stringify({
-            command: "Command1",
-            user_id: 4321214421
-        }),
+        body: JSON.stringify(data),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
     });
 }
 
-module.exports = { getData, sendData, getApiData, postApiData };
+module.exports = { sendData, getApiData, postApiData };
