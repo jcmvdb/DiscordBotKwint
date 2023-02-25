@@ -9,9 +9,9 @@ const defaultValues = {
 
 function argHandler(args) {
     const botName = botNameFromArgs(args)
-    const botconfig = require(`./secrets/${botName}.json`);
-    defaultValues.verbosity = botconfig.verbosity;
-    let verbosity = botconfig.verbosity;
+    const botConfig = require(`../../secrets/${botName}.json`)
+    defaultValues.verbosity = botConfig.verbosity;
+    let verbosity = botConfig.verbosity;
     if (args.includes("--v")) {
         verbosity = args[args.indexOf("--v") + 1]
     }

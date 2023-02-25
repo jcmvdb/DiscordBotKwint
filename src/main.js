@@ -7,7 +7,7 @@ const { sendData } = require('./utils/databaseFunctions.util');
 const { errorHandler } = require("./utils/errorHandling.util")
 
 const arguments  = argHandler(process.argv);
-const botConfig  = require(`./secrets/${arguments.bot}.json`);
+const botConfig = require(`../secrets/${arguments.bot}.json`);
 const secret = require('../secrets/secrets.json');
 
 const client = new Client({intents: [GatewayIntentBits.Guilds]});

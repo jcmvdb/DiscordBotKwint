@@ -2,7 +2,7 @@
   "name": "discordbotkwint",
   "version": "1.0.0",
   "description": "Discord bot for programming bitches",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "nodemon main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
