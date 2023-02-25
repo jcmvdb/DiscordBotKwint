@@ -1,31 +1,34 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { sendData } = require("../utils/databaseFunctions.util");
+const { sendData } = require('../utils/databaseFunctions.util');
 
 module.exports = {
-    category: "test",
-    data: new SlashCommandBuilder()
-        .setName("make-quote")
-        .setDescription("Send data to the server using the API")
-        .addStringOption(option =>
-            option.setName('title')
-                .setDescription('The input to echo back')
-                .setRequired(true))
-        .addStringOption(option =>
-            option.setName("text")
-                .setDescription("description")
-                .setRequired(true)),
-    async execute(client, interaction, secret) {
-        const title = interaction.options.getString("title");
-        const text = interaction.options.getString("text");
+	category: 'test',
+	data: new SlashCommandBuilder()
+		.setName('make-quote')
+		.setDescription('Send data to the server using the API')
+		.addStringOption((option) =>
+			option
+				.setName('title')
+				.setDescription('The input to echo back')
+				.setRequired(true)
+		)
+		.addStringOption((option) =>
+			option
+				.setName('text')
+				.setDescription('description')
+				.setRequired(true)
+		),
+	async execute(client, interaction, secret) {
+		const title = interaction.options.getString('title');
+		const text = interaction.options.getString('text');
 
-        const dataToSend = {
-            title,
-            text
-        }
+		const dataToSend = {
+			title,
+			text,
+		};
 
-        sendData("test", interaction, dataToSend);
+		sendData('test', interaction, dataToSend);
 
-        await interaction.reply(`Title:\n**${title}**\n\nText\n**${text}**`);
-
-    },
+		await interaction.reply(`Title:\n**${title}**\n\nText\n**${text}**`);
+	},
 };

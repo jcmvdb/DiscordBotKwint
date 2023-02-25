@@ -1,8 +1,7 @@
 function errorHandler(error) {
-    console.error(error)
+	console.error(error);
 }
-
 
 module.exports = {
-    errorHandler
-}
+	errorHandler,
+};
