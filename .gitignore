@@ -6,5 +6,6 @@
 /note.json
 /.fleet
 /aaa.txt
-.DS_store
 /commands/miscTest.js
+.env
+.DS_store
