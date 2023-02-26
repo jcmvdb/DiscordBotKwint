@@ -23,7 +23,7 @@ module.exports = {
 		)
 		.setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles),
 
-	async execute(client, interaction, secret) {
+	async execute(client, interaction) {
 		let member = interaction.options.getMember('username');
 		let role = interaction.options.getRole('role');
 		member.roles.add(role);

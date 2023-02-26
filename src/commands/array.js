@@ -5,7 +5,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('array')
 		.setDescription('get pong back'),
-	async execute(client, interaction, secret) {
+	async execute(client, interaction) {
 		const list = ['1', '2', '3', '4', 'test'];
 		let listString = '';
 

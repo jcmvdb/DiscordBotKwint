@@ -18,7 +18,7 @@ module.exports = {
 				.setDescription('description')
 				.setRequired(true)
 		),
-	async execute(client, interaction, secret) {
+	async execute(client, interaction) {
 		const title = interaction.options.getString('title');
 		const text = interaction.options.getString('text');
 

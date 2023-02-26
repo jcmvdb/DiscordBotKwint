@@ -8,7 +8,7 @@ module.exports = {
 		.addStringOption((option) =>
 			option.setName('input').setDescription('The input to echo back')
 		),
-	async execute(client, interaction, secret) {
+	async execute(client, interaction) {
 		const noOption = 'Er is geen reden gegeven';
 		const test = interaction.options.getString('input') ?? noOption;
 		await interaction.reply(

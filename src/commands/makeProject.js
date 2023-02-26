@@ -23,7 +23,7 @@ module.exports = {
 				.setDescription('set the prefix for the project')
 				.setRequired(true)
 		),
-	async execute(client, interaction, secret) {
+	async execute(client, interaction) {
 		const projectName = interaction.options.getString('name');
 		const projectPrefix = interaction.options.getString('prefix');
 		// await interaction.reply(`Project name: \n${projectName} \n\nProject prefix:\n${projectPrefix}`);

@@ -8,7 +8,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('role')
 		.setDescription('Description'),
-	async execute(client, interaction, secret) {
+	async execute(client, interaction) {
 		// Here goes the code
 		// const role = interaction.options.getRole('role');
 		// const member = interaction.options.getMember('target');
