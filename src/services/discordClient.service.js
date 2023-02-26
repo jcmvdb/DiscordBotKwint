@@ -12,7 +12,6 @@ client.once(Events.ClientReady, (c) => {
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
-	console.log(commands);
 	if (interaction.isChatInputCommand) {
 		commands.arr
 			.find((command) => command.data.name === interaction.commandName)
