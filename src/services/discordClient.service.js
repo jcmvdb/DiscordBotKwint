@@ -9,6 +9,7 @@ const client = new Client({
 
 client.once(Events.ClientReady, (c) => {
 	console.log(`Ready, logged in as ${c.user.tag}`);
+	client.commands = commands;
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
