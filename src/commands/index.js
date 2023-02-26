@@ -13,21 +13,19 @@ const test = require('./test');
 const time = require('./time');
 const userInformation = require('./userInformation');
 
-module.exports = {
-	arr: [
-		apiGetData,
-		apiPostData,
-		array,
-		ban,
-		botEmbed,
-		catPictures,
-		commands,
-		giveRole,
-		makeProject,
-		makeQuote,
-		role,
-		test,
-		time,
-		userInformation,
-	],
-};
+module.exports = [
+	apiGetData,
+	apiPostData,
+	array,
+	ban,
+	botEmbed,
+	catPictures,
+	commands,
+	giveRole,
+	makeProject,
+	makeQuote,
+	role,
+	test,
+	time,
+	userInformation,
+];

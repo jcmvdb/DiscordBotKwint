@@ -13,7 +13,7 @@ client.once(Events.ClientReady, (c) => {
 
 client.on(Events.InteractionCreate, async (interaction) => {
 	if (interaction.isChatInputCommand) {
-		commands.arr
+		commands
 			.find((command) => command.data.name === interaction.commandName)
 			?.execute(client, interaction)
 			.then(() => {

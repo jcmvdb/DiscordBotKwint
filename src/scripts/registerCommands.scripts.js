@@ -2,7 +2,7 @@ const commands = require('../commands');
 const { REST, Routes } = require('discord.js');
 require('dotenv').config();
 
-const slashCommands = commands.arr.map((command) => command.data.toJSON());
+const slashCommands = commands.map((command) => command.data.toJSON());
 
 const guildId = process.env.GUILD_ID;
 const clientId = process.env.CLIENT_ID;
