@@ -4,7 +4,7 @@
   "description": "Discord bot for programming bitches",
   "main": "src/main.js",
   "scripts": {
-    "start": "nodemon main.js",
+    "start": "nodemon src/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,8 +18,9 @@
   },
   "homepage": "https://github.com/jcmvdb/DiscordBotKwint#readme",
   "dependencies": {
+    "@discordjs/rest": "^1.5.0",
     "discord.js": "^14.7.1",
-    "@discordjs/rest": "^1.5.0"
+    "dotenv": "^16.0.3"
   },
   "devDependencies": {
     "eslint": "^8.34.0",
