@@ -5,7 +5,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('time')
 		.setDescription('see the current time'),
-	async execute(client, interaction, secret) {
+	async execute(client, interaction) {
 		const time = new Date();
 		console.log(time);
 

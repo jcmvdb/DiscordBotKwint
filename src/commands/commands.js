@@ -6,7 +6,7 @@ module.exports = {
 		// .setCateogry("wat")
 		.setName('commands')
 		.setDescription('get the full list of all commands'),
-	async execute(client, interaction, secret) {
+	async execute(client, interaction) {
 		let command = client.commands;
 		// console.log(command);
 		const text = '**Commands**';

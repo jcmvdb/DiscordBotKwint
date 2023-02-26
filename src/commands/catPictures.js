@@ -6,11 +6,10 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('cat')
 		.setDescription('get a free cat pictrue'),
-
-	async execute(client, interaction, secret) {
+	async execute(client, interaction) {
 		const URL = 'https://api.thecatapi.com/v1/';
 		const headers = {
-			'x-api-key': `${secret.catKey}`,
+			'x-api-key': `${process.env.CATKEY}`,
 			'Content-Type': 'application/json',
 		};
 

@@ -6,7 +6,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('botembed')
 		.setDescription('This is a embed test'),
-	async execute(client, interaction, secret) {
+	async execute(client, interaction) {
 		const botEmbed = new EmbedBuilder()
 			.setTitle('Title')
 			.setDescription('Description')

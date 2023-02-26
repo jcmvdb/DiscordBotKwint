@@ -8,7 +8,7 @@ module.exports = {
 		.addUserOption((option) =>
 			option.setName('user').setDescription('select a user')
 		),
-	async execute(client, interaction, secret) {
+	async execute(client, interaction) {
 		const joinDate = new Date(interaction.member.joinedTimestamp).getDate();
 		const joinDay = new Date(interaction.member.joinedTimestamp).getDay();
 		const joinMonth = new Date(

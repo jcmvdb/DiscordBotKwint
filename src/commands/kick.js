@@ -18,7 +18,7 @@ module.exports = {
 		)
 		.setDefaultMemberPermissions(PermissionFlagsBits.KickMembers),
 
-	async execute(client, interaction, secret) {
+	async execute(client, interaction) {
 		const member = interaction.options.getMember('user');
 		const reason =
 			interaction.options.getString('reason') ?? 'none provided';
