@@ -1,5 +1,4 @@
 const { errorHandler } = require('./errorHandling.util');
-const secret = require('../../secrets/secrets.json');
 
 function sendData(path, interaction, data) {
 	const URL = 'https://discord.jcmvdb.com/';
@@ -9,7 +8,7 @@ function sendData(path, interaction, data) {
 		.replaceAll(' ', '%20');
 	// console.log(data)
 
-	const fetchURL = URL.concat(`${path}?${queryString}&key=${secret.key}`);
+	const fetchURL = URL.concat(`${path}?${queryString}&key=${process.env.DB_KEY}`);
 	fetch(fetchURL).catch((err) => errorHandler(err));
 }
 
