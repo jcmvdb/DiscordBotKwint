@@ -14,6 +14,7 @@ const time = require('./time');
 const userInformation = require('./userInformation');
 const ping = require('./ping');
 const rememberBirthDay = require('./rememberBirthday')
+const getQuote = require("./getQuote");
 
 module.exports = [
 	apiGetData,
@@ -32,4 +33,5 @@ module.exports = [
 	userInformation,
 	ping,
 	rememberBirthDay,
+	getQuote,
 ];

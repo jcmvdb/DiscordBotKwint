@@ -3,7 +3,8 @@ const { errorHandler } = require('./errorHandling.util');
 function getApiData(path) {
 	const url = `https://discord.jcmvdb.com/api/${path}`;
 	return fetch(url).then(async (res) => {
-		return res.json();
+		// return res.json();
+		console.log(res);
 	});
 }
 
