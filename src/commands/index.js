@@ -2,22 +2,20 @@ const apiGetData = require('./apiGetData');
 const apiPostData = require('./apiPostData');
 const array = require('./array');
 const ban = require('./ban');
+const kick = require('./kick');
 const botEmbed = require('./botEmbed');
 const catPictures = require('./catPictures');
 const giveRole = require('./giveRole');
-const kick = require('./kick');
+const role = require('./role');
 const makeProject = require('./makeProject');
 const makeQuote = require('./makeQuote');
-const ping = require('./ping');
+const getQuote = require('./getQuote');
 const rememberBirthDay = require('./rememberBirthday');
-const role = require('./role');
 const commands = require('./showCommands');
 const test = require('./test');
 const time = require('./time');
-const userInformation = require('./userInformation');
 const ping = require('./ping');
-const rememberBirthDay = require('./rememberBirthday');
-const getQuote = require('./getQuote');
+const userInformation = require('./userInformation');
 
 module.exports = [
 	apiGetData,
