@@ -15,6 +15,9 @@ const commands = require('./showCommands');
 const test = require('./test');
 const time = require('./time');
 const userInformation = require('./userInformation');
+const ping = require('./ping');
+const rememberBirthDay = require('./rememberBirthday');
+const getQuote = require('./getQuote');
 
 module.exports = [
 	apiGetData,
@@ -34,4 +37,5 @@ module.exports = [
 	ping,
 	rememberBirthDay,
 	kick,
+	getQuote,
 ];
