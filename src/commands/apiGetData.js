@@ -9,7 +9,7 @@ module.exports = {
 			'Gets data back from an api call to the server (discord.jcmvdb.com/api)'
 		),
 	async execute(client, interaction) {
-		const data = await getApi('command/getData');
+		const data = await getApi('quote/getData');
 		console.log(data);
 
 		await interaction.reply('check console');
