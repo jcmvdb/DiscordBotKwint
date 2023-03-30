@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { postApiData } = require('../utils/databaseFunctions.util');
+const { postApi } = require('../utils/remoteDB.util');
 
 module.exports = {
 	category: 'test',
@@ -22,7 +22,7 @@ module.exports = {
 		const title = interaction.options.getString('title');
 		const text = interaction.options.getString('text');
 
-		postApiData('quote/postData', {
+		postApi('quote/postData', {
 			title,
 			text,
 		});

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { postApiData } = require('../utils/databaseFunctions.util');
+const { postApi } = require('../utils/remoteDB.util');
 
 module.exports = {
 	category: 'test',
@@ -9,7 +9,7 @@ module.exports = {
 			'Posts data back from an api call to the server (discord.jcmvdb.com/api)'
 		),
 	async execute(client, interaction) {
-		postApiData('postData');
+		postApi('postData');
 		await interaction.reply('bitch het werkt misschien');
 	},
 };

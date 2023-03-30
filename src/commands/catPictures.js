@@ -3,9 +3,7 @@ const { createCatEmbed } = require('../utils/embedCreator.util');
 
 module.exports = {
 	category: 'test',
-	data: new SlashCommandBuilder()
-		.setName('cat')
-		.setDescription('get a free cat pictrue'),
+	data: new SlashCommandBuilder().setName('cat').setDescription('get a free cat pictrue'),
 	async execute(client, interaction) {
 		const URL = 'https://api.thecatapi.com/v1/';
 		const headers = {
@@ -20,12 +18,7 @@ module.exports = {
 			.then((response) => response.json())
 			.then((json) => {
 				interaction.reply({
-					embeds: [
-						createCatEmbed(
-							{ image: json[0].url, client, interaction },
-							'f1d02a'
-						),
-					],
+					embeds: [createCatEmbed({ image: json[0].url, client, interaction }, 'f1d02a')],
 				});
 			});
 	},

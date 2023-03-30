@@ -17,7 +17,7 @@ module.exports = {
 		const joinYear = new Date(
 			interaction.member.joinedTimestamp
 		).getFullYear();
-		var months = [
+		const months = [
 			'jan',
 			'feb',
 			'mar',
@@ -31,7 +31,7 @@ module.exports = {
 			'nov',
 			'dec',
 		];
-		var days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+		const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 		const day = new Date(interaction.member.joinedTimestamp).getDay();
 
 		const noUser = '-';

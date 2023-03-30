@@ -1,14 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
 
-//embedDTO expects fields of
-// title as String
-// fields as [{name :'string1', value: "Some value here"}] (multiple allowed)
-// description as String
-// footer as String
-// client
-// interaction
-// (optional) image as a url
-
 function createEmbed(embedDTO) {
 	const embed = new EmbedBuilder()
 		.setTitle(embedDTO.title)
@@ -21,33 +12,13 @@ function createEmbed(embedDTO) {
 		embed.setImage(embedDTO.image);
 	}
 	if (embedDTO.author) {
-		console.log('reached');
 		embed.setAuthor({ name: embedDTO.author });
 	}
+
 	return embed;
 }
 
 function createBanEmbed(recievedEmbedDTO, colour = generateRandomColour()) {
-	const embedDTO = {
-		title: 'Ban',
-		fields: [
-			{
-				name: 'User banned',
-				value: `${recievedEmbedDTO.bannedUser}`,
-				inline: true,
-			},
-			{
-				name: 'Banned by',
-				value: `${recievedEmbedDTO.interaction.member.user}`,
-				inline: true,
-			},
-		],
-		description: `${recievedEmbedDTO.bannedUser} was kicked by ${recievedEmbedDTO.interaction.member.user}`,
-		footer: 'Someone was kicked',
-		author: recievedEmbedDTO.interaction.user.username,
-		colour,
-	};
-
 	if (recievedEmbedDTO.sentDM === false) {
 		embedDTO.fields[2] = {
 			name: 'No DM sent',
@@ -104,12 +75,34 @@ function createCatEmbed(recievedEmbedDTO, colour = generateRandomColour()) {
 	return createEmbed(embedDTO);
 }
 
+function createCommandListEmbed(recievedEmbedDTO, colour = generateRandomColour()) {
+	const embedDTO = {
+		title: 'List of commands',
+		fields: [
+			{
+				name: 'Test commands',
+				value: `${recievedEmbedDTO.testCommands.join('\n')}`,
+				inline: true,
+			},
+			{
+				name: 'Admin commands',
+				value: `${recievedEmbedDTO.adminCommands.join('\n')}`,
+				inline: true,
+			},
+		],
+		description: 'All commands on this server',
+		footer: 'Beep boop, at your service!',
+		colour,
+	};
+
+	return createEmbed(embedDTO);
+}
 function generateRandomColour() {
 	return Math.floor(Math.random() * 16777215).toString(16);
 }
 module.exports = {
-	createEmbed,
 	createBanEmbed,
 	createKickEmbed,
 	createCatEmbed,
+	createCommandListEmbed,
 };

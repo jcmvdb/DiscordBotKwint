@@ -1,14 +1,15 @@
-const { Client, Events, GatewayIntentbits } = require('discord.js');
-const { postApiData } = require('../utils/databaseFunctions.util');
+const { Client, Events } = require('discord.js');
+const { postApi } = require('../utils/remoteDB.util');
 const { errorHandler } = require('../utils/errorHandling.util');
+const { prisma } = require('./prisma.service');
 const commands = require('../commands');
 
 const client = new Client({
 	intents: ['Guilds'],
 });
 
-client.once(Events.ClientReady, (c) => {
-	console.log(`Ready, logged in as ${c.user.tag}`);
+client.once(Events.ClientReady, (client) => {
+	console.log(`Ready, logged in as ${client.user.tag}`);
 	client.commands = commands;
 });
 
@@ -21,10 +22,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
 				console.log(
 					`user: ${interaction.user.username}, has used command: ${interaction.commandName}`
 				);
-				postApiData('command/postData', {
-					command: interaction.commandName,
-					userId: interaction.user.id,
-				});
+				insertCommandEntry(interaction);
 			})
 			.catch((err) => {
 				errorHandler(err);
@@ -35,6 +33,20 @@ client.on(Events.InteractionCreate, async (interaction) => {
 			});
 	}
 });
+
+async function insertCommandEntry(interaction) {
+	await prisma.command.create({
+		data: {
+			commandName: interaction.commandName,
+			userId: interaction.user.id,
+		},
+	});
+
+	postApi('command/postData', {
+		command: interaction.commandName,
+		userId: interaction.user.id,
+	});
+}
 
 module.exports = {
 	client,
