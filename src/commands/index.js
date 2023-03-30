@@ -15,7 +15,7 @@ const commands = require('./showCommands');
 const test = require('./test');
 const time = require('./time');
 const ping = require('./ping');
-const userInformation = require('./user');
+const userInformation = require('./userInformation');
 
 module.exports = [
 	apiGetData,
