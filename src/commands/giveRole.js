@@ -1,9 +1,5 @@
-const {
-	SlashCommandBuilder,
-	PermissionFlagsBits,
-	EmbedBuilder,
-} = require('discord.js');
-
+const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } = require('discord.js');
+//EMBED NEEDS TO BE IMPROVED AND MIGRATED TO EMBEDCREATOR
 module.exports = {
 	category: 'test',
 	data: new SlashCommandBuilder()
@@ -16,10 +12,7 @@ module.exports = {
 				.setRequired(true)
 		)
 		.addRoleOption((option) =>
-			option
-				.setName('role')
-				.setDescription('Role name to give to user')
-				.setRequired(true)
+			option.setName('role').setDescription('Role name to give to user').setRequired(true)
 		)
 		.setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles),
 

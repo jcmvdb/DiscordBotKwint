@@ -1,21 +1,12 @@
-const {
-	SlashCommandBuilder,
-	ChannelType,
-	PermissionsBitField,
-	CategoryChannelChildManager,
-	GuildCategory,
-} = require('discord.js');
-
+const { SlashCommandBuilder, ChannelType, PermissionsBitField } = require('discord.js');
+//NEEDS AN EMBED
 module.exports = {
 	category: 'test',
 	data: new SlashCommandBuilder()
 		.setName('make-project')
 		.setDescription('make a new project')
 		.addStringOption((option) =>
-			option
-				.setName('name')
-				.setDescription('name of the project')
-				.setRequired(true)
+			option.setName('name').setDescription('name of the project').setRequired(true)
 		)
 		.addStringOption((option) =>
 			option
@@ -64,8 +55,6 @@ module.exports = {
 			})
 		);
 
-		await interaction.reply(
-			`name:\n${projectName}\n\nPrefix:\n${projectPrefix}`
-		);
+		await interaction.reply(`name:\n${projectName}\n\nPrefix:\n${projectPrefix}`);
 	},
 };

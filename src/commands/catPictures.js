@@ -1,8 +1,8 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { createCatEmbed } = require('../utils/embedCreator.util');
-
+//EMBED NEEDS TO BE IMPROVED
 module.exports = {
-	category: 'test',
+	category: 'misc',
 	data: new SlashCommandBuilder().setName('cat').setDescription('get a free cat pictrue'),
 	async execute(client, interaction) {
 		const URL = 'https://api.thecatapi.com/v1/';

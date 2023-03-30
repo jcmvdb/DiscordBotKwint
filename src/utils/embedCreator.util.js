@@ -19,6 +19,25 @@ function createEmbed(embedDTO) {
 }
 
 function createBanEmbed(recievedEmbedDTO, colour = generateRandomColour()) {
+	const embedDTO = {
+		title: 'Ban',
+		fields: [
+			{
+				name: 'User banned',
+				value: `${recievedEmbedDTO.bannedUser}`,
+				inline: true,
+			},
+			{
+				name: 'Banned by',
+				value: `${recievedEmbedDTO.interaction.member.user}`,
+				inline: true,
+			},
+		],
+		description: `${recievedEmbedDTO.bannedUser} was banned by ${recievedEmbedDTO.interaction.member.user}`,
+		footer: 'Someone was banned',
+		author: recievedEmbedDTO.interaction.user.username,
+		colour,
+	};
 	if (recievedEmbedDTO.sentDM === false) {
 		embedDTO.fields[2] = {
 			name: 'No DM sent',

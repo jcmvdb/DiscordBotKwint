@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-
+//NEEDS TO BE MIGRATED TO EmbedCreator
 module.exports = {
 	category: 'test',
 	data: new SlashCommandBuilder()

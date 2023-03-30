@@ -23,3 +23,46 @@ model Command {
     commandName String
     userId      String
 }
+
+model User {
+    id        String    @id @unique
+    createdAt DateTime  @default(now())
+    birthday  Birthday?
+    ban       Ban?
+    mute      Mute?
+    warnings  Warning[]
+}
+
+model Birthday {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    birthDay  DateTime
+    userId    String   @unique
+    user      User     @relation(fields: [userId], references: [id])
+}
+
+model Warning {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    reason    String
+    userId    String
+    user      User     @relation(fields: [userId], references: [id])
+}
+
+model Mute {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    endDate   DateTime
+    user      User     @relation(fields: [userId], references: [id])
+    userId    String   @unique
+}
+
+model Ban {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    endDate   DateTime
+    user      User     @relation(fields: [userId], references: [id])
+    userId    String   @unique
+}
