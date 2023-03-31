@@ -7,7 +7,7 @@ function createEmbed(embedDTO) {
 		.addFields(embedDTO.fields)
 		.setDescription(embedDTO.description)
 		.setColor(embedDTO.colour)
-		.setFooter({ text: embedDTO.footer })
+		.setFooter({ text: embedDTO.footer ?? 'Beep boop, at your service!' })
 		.setTimestamp();
 	if (embedDTO.image) {
 		embed.setImage(embedDTO.image);
@@ -119,7 +119,6 @@ function createCommandListEmbed(recievedEmbedDTO, colour = generateRandomColour(
 			},
 		],
 		description: 'All commands on this server',
-		footer: 'Beep boop, at your service!',
 		colour,
 	};
 
@@ -155,7 +154,6 @@ function createUserInformationEmbed(recievedEmbedDTO, colour = generateRandomCol
 		],
 		description: `<@${recievedEmbedDTO.user.id}>`,
 		thumbnail: recievedEmbedDTO.thumbnail,
-		footer: 'Beep boop, at your service',
 		colour,
 	};
 
