@@ -1,4 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
+const { monthArray } = require('../utils/monthArray.util');
 
 function createEmbed(embedDTO) {
 	const embed = new EmbedBuilder()
@@ -13,6 +14,9 @@ function createEmbed(embedDTO) {
 	}
 	if (embedDTO.author) {
 		embed.setAuthor({ name: embedDTO.author });
+	}
+	if (embedDTO.thumbnail) {
+		embed.setThumbnail(embedDTO.thumbnail);
 	}
 
 	return embed;
@@ -116,6 +120,42 @@ function createCommandListEmbed(recievedEmbedDTO, colour = generateRandomColour(
 
 	return createEmbed(embedDTO);
 }
+
+function createUserInformationEmbed(recievedEmbedDTO, colour = generateRandomColour()) {
+	const embedDTO = {
+		title: `${recievedEmbedDTO.user.username}#${recievedEmbedDTO.user.discriminator}`,
+		fields: [
+			{
+				name: 'Server',
+				value: recievedEmbedDTO.interaction.guild.name,
+			},
+			{
+				name: 'Joined on',
+				value: `${recievedEmbedDTO.joinedDate.getDate()} \
+					${monthArray[recievedEmbedDTO.joinedDate.getMonth()]} \
+					${recievedEmbedDTO.joinedDate.getFullYear()}`,
+				inline: true,
+			},
+			{
+				name: 'Created on',
+				value: `${recievedEmbedDTO.createdDate.getDate()} \
+					${monthArray[recievedEmbedDTO.createdDate.getMonth()]} \
+					${recievedEmbedDTO.createdDate.getFullYear()}`,
+				inline: true,
+			},
+			{
+				name: 'Roles',
+				value: `${recievedEmbedDTO.roles}`,
+			},
+		],
+		description: `<@${recievedEmbedDTO.user.id}>`,
+		thumbnail: recievedEmbedDTO.thumbnail,
+		footer: 'Beep boop, at your service',
+		colour,
+	};
+
+	return createEmbed(embedDTO);
+}
 function generateRandomColour() {
 	return Math.floor(Math.random() * 16777215).toString(16);
 }
@@ -124,4 +164,5 @@ module.exports = {
 	createKickEmbed,
 	createCatEmbed,
 	createCommandListEmbed,
+	createUserInformationEmbed,
 };

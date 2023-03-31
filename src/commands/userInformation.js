@@ -1,5 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-//NEEDS TO BE MIGRATED TO EmbedCreator
+const { createUserInformationEmbed } = require('../utils/embedCreator.util');
+const { roleMapToArray } = require('../utils/roleMapToArray.util');
+
 module.exports = {
 	category: 'test',
 	data: new SlashCommandBuilder()
@@ -7,51 +9,23 @@ module.exports = {
 		.setDescription('This give user information')
 		.addUserOption((option) => option.setName('user').setDescription('select a user')),
 	async execute(client, interaction) {
-		const userOption = interaction.options.getUser('user');
-		const user = userOption ? userOption : interaction.member.user;
+		const user = interaction.options.getUser('user') ?? interaction.member.user;
 		const createdDate = new Date(user.createdTimestamp);
 		const joinedDate = new Date((await interaction.guild.members.fetch(user)).joinedTimestamp);
+		const roles = roleMapToArray((await interaction.guild.members.fetch(user)).roles.cache)
+			.slice(0, -1)
+			.map((role) => `<@&${role.id}>`)
+			.join(' ');
 
-		const months = [
-			'Jan',
-			'Feb',
-			'Mar',
-			'Apr',
-			'May',
-			'Jun',
-			'Jul',
-			'Aug',
-			'Sep',
-			'Oct',
-			'Nov',
-			'Dec',
-		];
+		embedDTO = {
+			user,
+			createdDate,
+			joinedDate,
+			roles,
+			interaction,
+			thumbnail: user.displayAvatarURL(),
+		};
 
-		const userEmbed = new EmbedBuilder()
-			.setTitle(`${user.username}#${user.discriminator}`)
-			.setDescription(`<@${user.id}>`)
-			.setColor('#3fac7b')
-			.addFields(
-				{
-					name: 'Server',
-					value: interaction.guild.name,
-				},
-				{
-					name: 'Joined on',
-					value: `${joinedDate.getDate()} \
-						${months[joinedDate.getMonth()]} \
-						${joinedDate.getFullYear()}`,
-					inline: true,
-				},
-				{
-					name: 'Created on',
-					value: `${createdDate.getDate()} \
-						${months[createdDate.getMonth()]} \
-						${createdDate.getFullYear()}`,
-					inline: true,
-				}
-			)
-			.setThumbnail(`${user.displayAvatarURL()}`);
-		await interaction.reply({ embeds: [userEmbed] });
+		await interaction.reply({ embeds: [createUserInformationEmbed(embedDTO)] });
 	},
 };
