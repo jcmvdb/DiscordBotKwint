@@ -112,6 +112,11 @@ function createCommandListEmbed(recievedEmbedDTO, colour = generateRandomColour(
 				value: `${recievedEmbedDTO.adminCommands.join('\n')}`,
 				inline: true,
 			},
+			{
+				name: 'Miscellaneous commands',
+				value: `${recievedEmbedDTO.miscCommands.join('\n')}`,
+				inline: true,
+			},
 		],
 		description: 'All commands on this server',
 		footer: 'Beep boop, at your service!',

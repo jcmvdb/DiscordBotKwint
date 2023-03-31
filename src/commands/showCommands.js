@@ -9,6 +9,7 @@ module.exports = {
 	async execute(client, interaction) {
 		const testCommands = [];
 		const adminCommands = [];
+		const miscCommands = [];
 		client.commands.forEach((command) => {
 			switch (command.category) {
 				case 'test':
@@ -17,6 +18,8 @@ module.exports = {
 				case 'admin':
 					adminCommands.push(command.data.name);
 					break;
+				case 'misc':
+					miscCommands.push(command.data.name);
 			}
 		});
 		const embedDTO = {
@@ -24,6 +27,7 @@ module.exports = {
 			adminCommands,
 			client,
 			interaction,
+			miscCommands,
 		};
 
 		await interaction.reply({
