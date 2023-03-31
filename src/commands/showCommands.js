@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { createCommandListEmbed } = require('../utils/embedCreator.util');
-//NEEDS AN IMPROVED EMBED
+
 module.exports = {
 	category: 'test',
 	data: new SlashCommandBuilder()
