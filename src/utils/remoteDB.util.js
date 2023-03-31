@@ -5,7 +5,6 @@ async function getApi(path) {
 
 async function postApi(path, data) {
 	const url = `https://discord.jcmvdb.com/api/${path}`;
-	console.log(data);
 	await fetch(url, {
 		method: 'POST',
 		body: JSON.stringify(data),
