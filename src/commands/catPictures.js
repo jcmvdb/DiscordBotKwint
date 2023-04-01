@@ -3,7 +3,10 @@ const { createCatEmbed } = require('../utils/embedCreator.util');
 //EMBED NEEDS TO BE IMPROVED
 module.exports = {
 	category: 'misc',
-	data: new SlashCommandBuilder().setName('cat').setDescription('get a free cat pictrue'),
+	data: new SlashCommandBuilder()
+		.setName('cat')
+		.setDescription('get a free cat pictrue')
+		.toJSON(),
 	async execute(client, interaction) {
 		const URL = 'https://api.thecatapi.com/v1/';
 		const headers = {

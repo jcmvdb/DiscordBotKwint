@@ -11,7 +11,8 @@ module.exports = {
 		)
 		.addStringOption((option) =>
 			option.setName('text').setDescription('description').setRequired(true)
-		),
+		)
+		.toJSON(),
 	async execute(client, interaction) {
 		const title = interaction.options.getString('title');
 		const text = interaction.options.getString('text');

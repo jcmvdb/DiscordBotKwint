@@ -1,6 +1,5 @@
 function roleMapToArray(roleMap) {
-	const value = Array.from(roleMap).map(([id, role]) => role);
-	return value;
+	return (value = Array.from(roleMap).map(([id, role]) => role));
 }
 
 module.exports = { roleMapToArray };

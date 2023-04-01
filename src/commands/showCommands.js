@@ -5,7 +5,8 @@ module.exports = {
 	category: 'test',
 	data: new SlashCommandBuilder()
 		.setName('show-commands')
-		.setDescription('get the full list of all commands'),
+		.setDescription('get the full list of all commands')
+		.toJSON(),
 	async execute(client, interaction) {
 		const testCommands = [];
 		const adminCommands = [];

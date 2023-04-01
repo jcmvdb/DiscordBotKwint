@@ -16,7 +16,8 @@ module.exports = {
 				.setName('delete-messages')
 				.setDescription('How many days of messages to delete, max seven')
 		)
-		.setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
+		.setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
+		.toJSON(),
 
 	async execute(client, interaction) {
 		const member = interaction.options.getMember('user');

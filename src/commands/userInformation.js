@@ -7,7 +7,8 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('user')
 		.setDescription('This give user information')
-		.addUserOption((option) => option.setName('user').setDescription('select a user')),
+		.addUserOption((option) => option.setName('user').setDescription('select a user'))
+		.toJSON(),
 	async execute(client, interaction) {
 		const user = interaction.options.getUser('user') ?? interaction.member.user;
 		const createdDate = new Date(user.createdTimestamp);

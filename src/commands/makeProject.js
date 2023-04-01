@@ -13,7 +13,8 @@ module.exports = {
 				.setName('prefix')
 				.setDescription('set the prefix for the project')
 				.setRequired(true)
-		),
+		)
+		.toJSON(),
 	async execute(client, interaction) {
 		const projectName = interaction.options.getString('name');
 		const projectPrefix = interaction.options.getString('prefix');

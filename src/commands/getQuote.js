@@ -5,7 +5,8 @@ module.exports = {
 	category: 'test',
 	data: new SlashCommandBuilder()
 		.setName('get-random-quote')
-		.setDescription('get a random quote'),
+		.setDescription('get a random quote')
+		.toJSON(),
 	async execute(client, interaction) {
 		const data = await getApi('quote/getData');
 		console.log(data);

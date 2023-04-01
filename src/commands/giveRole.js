@@ -14,7 +14,8 @@ module.exports = {
 		.addRoleOption((option) =>
 			option.setName('role').setDescription('Role name to give to user').setRequired(true)
 		)
-		.setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles),
+		.setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles)
+		.toJSON(),
 
 	async execute(client, interaction) {
 		const member = interaction.options.getMember('username');
@@ -31,7 +32,8 @@ module.exports = {
 			)
 			.setTimestamp()
 			.setFooter({ text: 'Footer' })
-			.setAuthor({ name: interaction.member.user.username });
+			.setAuthor({ name: interaction.member.user.username })
+			.toJSON();
 
 		await interaction.reply({ embeds: [botEmbed] });
 	},

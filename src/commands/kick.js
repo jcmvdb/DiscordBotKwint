@@ -8,25 +8,19 @@ module.exports = {
 		.setName('kick')
 		.setDescription('you can kick a person')
 		.addUserOption((option) =>
-			option
-				.setName('user')
-				.setDescription('User that needs to be kicked')
-				.setRequired(true)
+			option.setName('user').setDescription('User that needs to be kicked').setRequired(true)
 		)
-		.addStringOption((option) =>
-			option.setName('reason').setDescription('give reason to kick')
-		)
-		.setDefaultMemberPermissions(PermissionFlagsBits.KickMembers),
+		.addStringOption((option) => option.setName('reason').setDescription('give reason to kick'))
+		.setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
+		.toJSON(),
 
 	async execute(client, interaction) {
 		const member = interaction.options.getMember('user');
-		const reason =
-			interaction.options.getString('reason') ?? 'none provided';
+		const reason = interaction.options.getString('reason') ?? 'none provided';
 
 		if (member.permissions.has([PermissionFlagsBits.Administrator])) {
 			await interaction.reply({
-				content:
-					"You can't ban this user because they're an administrator",
+				content: "You can't ban this user because they're an administrator",
 				ephemeral: true,
 			});
 			return;
