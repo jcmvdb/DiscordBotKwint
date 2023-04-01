@@ -125,7 +125,7 @@ function createCommandListEmbed(recievedEmbedDTO, colour = generateRandomColour(
 	return createEmbed(embedDTO);
 }
 
-function createShowCommandEmbedf(recievedEmbedDTO, colour = generateRandomColour()) {
+function createShowCommandEmbed(recievedEmbedDTO, colour = generateRandomColour()) {
 	const embedDTO = {};
 
 	return createEmbed(embedDTO);
@@ -160,6 +160,7 @@ function createUserInformationEmbed(recievedEmbedDTO, colour = generateRandomCol
 		],
 		description: `<@${recievedEmbedDTO.user.id}>`,
 		thumbnail: recievedEmbedDTO.thumbnail,
+		footer: `ID : ${recievedEmbedDTO.user.id}`,
 		colour,
 	};
 
@@ -174,4 +175,5 @@ module.exports = {
 	createCatEmbed,
 	createCommandListEmbed,
 	createUserInformationEmbed,
+	createShowCommandEmbed,
 };
