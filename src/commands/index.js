@@ -6,7 +6,7 @@ const makeProject = require('./makeProject');
 const makeQuote = require('./makeQuote');
 const getQuote = require('./getQuote');
 const rememberBirthDay = require('./rememberBirthday');
-const showCommands = require('./showCommands');
+const showCommands = require('./listCommands');
 const ping = require('./ping');
 const userInformation = require('./userInformation');
 

@@ -4,7 +4,7 @@ const { createCommandListEmbed } = require('../utils/embedCreator.util');
 module.exports = {
 	category: 'test',
 	data: new SlashCommandBuilder()
-		.setName('show-commands')
+		.setName('list-commands')
 		.setDescription('get the full list of all commands')
 		.toJSON(),
 	async execute(client, interaction) {
