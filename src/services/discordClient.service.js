@@ -14,7 +14,7 @@ client.once(Events.ClientReady, (client) => {
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
-	if (interaction.isChatInputCommand) {
+	if (interaction.isChatInputCommand()) {
 		commands
 			.find((command) => command.data.name === interaction.commandName)
 			?.execute(client, interaction)
@@ -31,6 +31,12 @@ client.on(Events.InteractionCreate, async (interaction) => {
 					ephemeral: true,
 				});
 			});
+	}
+
+	if (interaction.isAutocomplete()) {
+		commands
+			.find((command) => command.data.name && command.autocomplete)
+			?.autocomplete(client, interaction);
 	}
 });
 

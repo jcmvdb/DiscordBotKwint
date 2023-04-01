@@ -5,13 +5,12 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('show-command')
 		.setDescription('Show more info about a specific command')
-		.addStringOption(
-			(option) =>
-				option
-					.setName('role')
-					.setDescription('Role you want more information on')
-					.setRequired(true)
-			//.setAutocomplete(true)
+		.addStringOption((option) =>
+			option
+				.setName('role')
+				.setDescription('Role you want more information on')
+				.setRequired(true)
+				.setAutocomplete(true)
 		)
 		.toJSON(),
 
@@ -32,7 +31,8 @@ module.exports = {
 		const focusedValue = interaction.options.getFocused();
 		const validCommandNames = client.commands
 			.map((command) => command.data.name)
-			.filter((element) => element.includes(focusedValue));
+			.filter((element) => element.includes(focusedValue))
+			.map((element) => ({ name: element, value: element }));
 		interaction.respond(validCommandNames);
 	},
 };

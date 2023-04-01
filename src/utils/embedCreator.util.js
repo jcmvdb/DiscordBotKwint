@@ -104,23 +104,29 @@ function createCommandListEmbed(recievedEmbedDTO, colour = generateRandomColour(
 		fields: [
 			{
 				name: 'Test commands',
-				value: `${recievedEmbedDTO.testCommands.join('\n')}`,
+				value: `/${recievedEmbedDTO.testCommands.join('\n/')}`,
 				inline: true,
 			},
 			{
 				name: 'Admin commands',
-				value: `${recievedEmbedDTO.adminCommands.join('\n')}`,
+				value: `/${recievedEmbedDTO.adminCommands.join('\n/')}`,
 				inline: true,
 			},
 			{
 				name: 'Miscellaneous commands',
-				value: `${recievedEmbedDTO.miscCommands.join('\n')}`,
+				value: `/${recievedEmbedDTO.miscCommands.join('\n/')}`,
 				inline: true,
 			},
 		],
-		description: 'All commands on this server',
+		description: 'All commands on this server, show an individual command with /',
 		colour,
 	};
+
+	return createEmbed(embedDTO);
+}
+
+function createShowCommandEmbedf(recievedEmbedDTO, colour = generateRandomColour()) {
+	const embedDTO = {};
 
 	return createEmbed(embedDTO);
 }

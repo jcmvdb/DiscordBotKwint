@@ -6,14 +6,15 @@ const makeProject = require('./makeProject');
 const makeQuote = require('./makeQuote');
 const getQuote = require('./getQuote');
 const rememberBirthDay = require('./rememberBirthday');
-const showCommands = require('./listCommands');
+const listCommands = require('./listCommands');
 const ping = require('./ping');
 const userInformation = require('./userInformation');
+const showCommand = require('./showCommand');
 
 module.exports = [
 	ban,
 	catPictures,
-	showCommands,
+	listCommands,
 	giveRole,
 	makeProject,
 	makeQuote,
@@ -22,4 +23,5 @@ module.exports = [
 	rememberBirthDay,
 	kick,
 	getQuote,
+	showCommand,
 ];
