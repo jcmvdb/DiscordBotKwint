@@ -26,9 +26,9 @@ module.exports = {
 		const embedDTO = {
 			testCommands,
 			adminCommands,
+			miscCommands,
 			client,
 			interaction,
-			miscCommands,
 		};
 
 		await interaction.reply({
