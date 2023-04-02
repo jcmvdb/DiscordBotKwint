@@ -6,7 +6,7 @@ module.exports = {
 	category: 'admin',
 	data: new SlashCommandBuilder()
 		.setName('ban')
-		.setDescription('you can ban a person test')
+		.setDescription('you can ban a person')
 		.addUserOption((option) =>
 			option.setName('user').setDescription('User that needs to be banned').setRequired(true)
 		)
