@@ -5,10 +5,12 @@ function createEmbed(embedDTO) {
 	const embed = new EmbedBuilder()
 		.setTitle(embedDTO.title)
 		.addFields(embedDTO.fields)
-		.setDescription(embedDTO.description)
 		.setColor(embedDTO.colour)
 		.setFooter({ text: embedDTO.footer ?? 'Beep boop, at your service!' })
 		.setTimestamp();
+	if (embedDTO.description) {
+		embed.setDescription(embedDTO.description);
+	}
 	if (embedDTO.image) {
 		embed.setImage(embedDTO.image);
 	}
@@ -126,7 +128,16 @@ function createCommandListEmbed(recievedEmbedDTO, colour = generateRandomColour(
 }
 
 function createShowCommandEmbed(recievedEmbedDTO, colour = generateRandomColour()) {
-	const embedDTO = {};
+	const embedDTO = {
+		title: `${recievedEmbedDTO.command.name}`,
+		fields: [
+			{
+				name: 'Description',
+				value: `${recievedEmbedDTO.command.description}`,
+			},
+		],
+		colour,
+	};
 
 	return createEmbed(embedDTO);
 }

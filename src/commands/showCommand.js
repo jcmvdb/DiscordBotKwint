@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
+const { createShowCommandEmbed, createCommandListEmbed } = require('../utils/embedCreator.util');
 
 module.exports = {
 	category: 'misc',
@@ -24,7 +25,15 @@ module.exports = {
 				ephemeral: true,
 			});
 		}
-		interaction.reply('fucuefuefs');
+		const command = client.commands[commandNames.indexOf(role)];
+		console.log(command);
+		const embedDTO = {
+			command: command.data,
+			client,
+			interaction,
+		};
+
+		interaction.reply({ embeds: [createShowCommandEmbed(embedDTO)] });
 	},
 
 	async autocomplete(client, interaction) {
